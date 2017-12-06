@@ -1,0 +1,59 @@
+---------
+Alarm
+---------
+can you create an alarm
+can you set an alarm
+can you create an alarm for me
+can you set an alarm for me
+create an alarm
+set an alarm
+create an alarm for me
+set an alarm for me
+make an alarm for (time)
+set an alarm for (time)
+delete all alarms
+delete all my alarms
+remove all my alarms
+remove all alarms
+turn alarm off
+turn off alarm
+---------
+Reminder
+---------
+can you make a reminder for me
+make a reminder to (reminder)
+delete all reminders
+delete my first reminder
+delete the first reminder
+delete the last reminder
+delete my last reminder
+---------
+Weather
+---------
+show me the weather for (location)
+show me the weather in  (location)
+what is the weather in  (location)
+what is the weather for  (location)
+what's the weather for  (location)
+what's the weather in  (location)
+---------
+Math
+---------
+solve this for me
+help me solve this
+---------
+Navigation
+---------
+mirror mode
+dashboard
+sleep
+sleep mode
+go to sleep
+---------
+A.I.
+---------
+what's new
+what is new
+hey
+hello
+wake up

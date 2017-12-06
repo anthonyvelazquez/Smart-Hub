@@ -1,0 +1,17 @@
+﻿{% extends "base.html" %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2 col-md-offset-5" style="color: white;text-align:center;">
+            <h1>Profile List</h1>
+            <hr>
+            {% for profile in profilelist %}
+            <a href="{% url 'Setup' profile_id=profile.pk %}" style="color: white"><h4>{{profile.profile_name}}</h4></a>
+            {% endfor %}  
+            <hr> 
+            <a href="{% url 'Profile_Create' %}" style="color: white"><h4>Add New...</h4></a>         
+        </div>
+    </div>
+</div>
+{% endblock %}>

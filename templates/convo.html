@@ -1,0 +1,108 @@
+﻿{% extends "base.html" %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2" style="color: white;">
+        </div>
+        <div class="col-md-8" style="color: white;text-align:center;">
+            <h5>{{current_date|date:"D N d Y"}}</h5>
+            <h1 id="time"></h1>
+        </div>
+        <div class="col-md-2" style="color: white;text-align:right;">
+            <h5><i class="fa fa-sun-o" aria-hidden="true"></i> Sunrise: {{sunrise|date:"P"}}</h5>
+            <h5><i class="fa fa-moon-o" aria-hidden="true"></i> Sunset: {{sunset|date:"P"}}</h5>
+            <h1><i class="fa fa-cloud" aria-hidden="true"> {{weather|floatformat:"0"}} F</i></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2" style="color: white;">
+            <h4><i class="fa fa-building" aria-hidden="true"></i> {{loc_1}}: {{loc_1_time}}</h4>
+            <h4><i class="fa fa-building" aria-hidden="true"></i> {{loc_2}}: {{loc_2_time}}</h4>
+        </div>
+        <div class="col-md-8" style="color: white; text-align:center;">
+        </div>
+        <div class="col-md-2" style="color: white;">
+        </div>
+    </div>
+    <div class="row">
+            <div class="col-md-2" style="color: white;margin-top:10%;">
+                Connected Devices
+                <hr style="padding: 0;margin: 0;"/>
+                {% for dev, batt in apple_devices %}
+                (-) {{dev}} - {{batt|floatformat:0}}%<br>
+                {% endfor %}
+            </div>
+            <div class="col-md-8" style="color: white; text-align:center;margin-top:10%;">
+            <div id="test"><h5 id="message">Hello {{profile.profile_name}}!</h5></div>
+            </div>
+            <div class="col-md-2" style="color: white;">
+            </div>
+        </div>
+    <div class="row">
+            <div class="col-md-4" style="color: white;margin-top:15%;">
+            <a href="{% url 'Profile' %}" style="color: rgb(26, 26, 26);">Profile Select</a>
+            </div>
+            <div class="col-md-5" style="color: white; text-align:center;">
+
+            </div>
+            <div class="col-md-3" style="color: white;margin-top:10%;">
+                {% if emails_available %}    
+                <h5>Unread Emails</h5>
+                    <hr style="padding: 0;margin: 0;"/>
+                <marquee behavior="scroll" direction="up" scrollamount="1" style="height:100px;">
+                    <ul>
+                        {% for from, subject in emaillist %}
+                    <li>{{from}} - {{subject}}</li>
+                        {% endfor %}
+                    </ul>
+                </marquee>
+                {% endif %}
+            </div>
+    </div>
+    <div class="row">
+            <div class="col-md-3" style="color: white;">
+            </div>
+            <div class="col-md-6" style="color: white; text-align:center;margin-top:5%;">
+            <h5>Google News Headlines</h5>
+            <hr style="padding: 0;margin: 0;"/>
+            <marquee behavior="scroll" direction="up" scrollamount="1" style="height:50px;">
+            <ul>
+            {% for headline in headlines %}
+            <li>{{headline.title}}</li>
+            {% endfor %}
+            </ul>
+            </marquee>
+            </div>
+            <div class="col-md-2 col-md-offset-1" style="text-align:center;color: white;margin-top:5%;">
+            <h5>Alarms</h5>
+            <hr style="padding: 0;margin: 0;"/>
+            <ul>
+                {% for alarm in alarmlist %}
+                <li>{% if alarm.enabled %} [ON]{% else %} [OFF] {% endif %} {{alarm.alarm_name}} - {{alarm.alarm_time|date:"P"}}</li>
+                {% endfor %}
+            </ul>
+            </div>
+        </div>
+</div>
+<script>
+    var test = '{{test}}';
+    if(test == "False")
+    {
+    $(window).bind("load", function() {
+    responsiveVoice.speak("{{speech_response}}");
+        $("#test").hide().fadeIn(5000, function () {
+            $("#test").fadeOut(5000, function () {
+            $("#message").text("How can I help you?");
+            $("#test").fadeIn(5000, function () {  });
+            
+
+        });
+        });
+    
+    });
+    }
+    
+</script>
+
+{% endblock %}>

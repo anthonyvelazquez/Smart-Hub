@@ -1,0 +1,77 @@
+﻿{% extends "base.html" %}
+{% block content %}
+
+<div class="container-fluid">
+    <form method="POST" action="{% url 'Setup' profile_id=profile.pk %}">{% csrf_token %}
+    <div class="row">
+        <div class="col-md-2" style="color: white;">
+            <h4>Profile Name: {{profile.profile_name}}</h4>
+        </div>
+        <div class="col-md-8" style="color: white;text-align:center;margin-top:1%;">
+            <button type="submit" class="btn btn-primary">Update Profile</button>
+            <a href="{% url 'Dashboard' %}" class="btn btn-primary">Go Home</a>
+        </div>
+        <div class="col-md-2" style="color: white;text-align:right;">
+        </div>
+    </div>
+    <div class="row" style="margin-top: 2%;">
+        <div class="col-md-2" style="color: white;">
+            <div class="form-group">
+                <label for="usr">New Profile Name:</label>
+                <input type="text" class="form-control" id="usr" name="prof_name" placeholder="Profile Name">
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 2%;">
+        <div class="col-md-2" style="color: white;">
+            <div class="form-group">
+                <label for="usr">First Name: {{profile.first_name}}</label>
+                <input type="text" class="form-control" id="usr" name="f_name" placeholder="First Name">
+            </div>
+        </div>
+        <div class="col-md-2" style="color: white;">
+            <div class="form-group">
+                <label for="usr">Last Name: {{profile.last_name}}</label>
+                <input type="text" class="form-control" id="usr" name="l_name" placeholder="Last Name">
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 2%;">
+        <div class="col-md-2" style="color: white;">
+            <div class="form-group">
+                <label for="usr">Address: {{profile.address}}</label>
+                <input type="text" class="form-control" id="usr" name="address" placeholder="Address">
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 2%;">
+        <div class="col-md-2" style="color: white;">
+            <div class="form-group">
+                <label for="usr">Location 1 Name: {{profile.loc_1_name}}</label>
+                <input type="text" class="form-control" id="usr" name="loc_1_name" placeholder="Location 1 Name">
+            </div>
+        </div>
+        <div class="col-md-2" style="color: white;">
+            <div class="form-group">
+                <label for="usr">Location 1 Address: {{profile.loc_1}}</label>
+                <input type="text" class="form-control" id="usr" name="loc_1" placeholder="Last Name">
+            </div>
+        </div>
+    </div>
+    <div class="row" style="margin-top: 2%;">
+        <div class="col-md-2" style="color: white;">
+            <div class="form-group">
+                <label for="usr">Location 2 Name: {{profile.loc_2_name}}</label>
+                <input type="text" class="form-control" id="usr" name="loc_2_name" placeholder="First Name">
+            </div>
+        </div>
+        <div class="col-md-2" style="color: white;">
+            <div class="form-group">
+                <label for="usr">Location 2 Address: {{profile.loc_2}}</label>
+                <input type="text" class="form-control" id="usr" name="loc_2" placeholder="Last Name">
+            </div>
+        </div>
+    </div>
+</form>
+</div>
+{% endblock %}>

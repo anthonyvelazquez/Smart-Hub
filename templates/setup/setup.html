@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2" style="color: white;">
+                <h5>{{current_date|date:"D N d Y"}}</h5>
+                <h1 id="time"></h1>
+        </div>
+        <div class="col-md-8" style="color: white;text-align:center;">
+            
+        </div>
+        <div class="col-md-2" style="color: white;text-align:right;">
+            <h5><i class="fa fa-sun-o" aria-hidden="true"></i> Sunrise: {{sunrise|date:"P"}}</h5>
+            <h5><i class="fa fa-moon-o" aria-hidden="true"></i> Sunset: {{sunset|date:"P"}}</h5>
+            <h1><i class="fa fa-cloud" aria-hidden="true"> {{weather|floatformat:"0"}} F</i></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2" style="color: white;">
+        </div>
+        <div class="col-md-8" style="color: white; text-align:center;">
+            Initial Setup
+        </div>
+        <div class="col-md-2" style="color: white;">
+        </div>
+    </div>
+    <div class="row">
+            <div class="col-md-2" style="color: white;margin-top:10%;">
+            </div>
+            <div class="col-md-8" style="color: white; text-align:center;margin-top:10%;">
+            <div class="col-md-2" style="color: white;">
+            </div>
+        </div>
+    <div class="row">
+            <div class="col-md-4" style="color: white;margin-top:15%;">
+            <a href="{% url 'Profile' %}" style="color: rgb(26, 26, 26);">Profile Select</a>
+            </div>
+            <div class="col-md-5" style="color: white; text-align:center;">
+
+            </div>
+            <div class="col-md-3" style="color: white;margin-top:10%;">
+            </div>
+    </div>
+    <div class="row">
+            <div class="col-md-3" style="color: white;">
+            </div>
+            <div class="col-md-6" style="color: white; text-align:center;margin-top:5%;">
+            </div>
+            <div class="col-md-2 col-md-offset-1" style="text-align:center;color: white;margin-top:5%;">
+            </div>
+        </div>
+</div>
+<script>
+</script>
+
+{% endblock %}>
