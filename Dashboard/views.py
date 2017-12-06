@@ -70,6 +70,8 @@ class DashboardView(View):
                 context['speech_response'] = GetDashboardSummarySpeech(profile, context)
         except KeyError:
             context['speech_response'] = "Dashboard"
+        if context['speech_response'] == "":
+            context['speech_response'] = "Dashboard"
         context['ai_voice'] = profile.ai_voice
         # context['alarm_url'] = reverse('Alarm_Display')
         #https://stackoverflow.com/questions/45906482/how-to-stream-opencv-frame-with-django-frame-in-realtime
