@@ -9,6 +9,7 @@ from Dashboard.models import UserProfile, Alarms
 import AI.CommandPhrases
 from API.Functions import *
 import xmltodict
+import re
 from random import randint
 
 def DetectBasicGreeting(speech):
@@ -39,8 +40,35 @@ def DetectSpecificGreeting(speech):
                 for reply in doc['greeting_specific']['response_list']['response']:
                     if isinstance(phrase, dict):
                         if identifier == reply['@id']:
-                            return reply['#text']
+                            return ReplyFormatter(reply['#text'])
     return ""
+
+def DetectAIInformationQuestions(speech):
+    import os
+    base_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+    file = base_dir + '/API/chatbot/ai_information.xml'
+    fd = open(file,"r")
+    doc = xmltodict.parse(fd.read())
+    for phrase in doc['ai_info']['human']:
+        if isinstance(phrase, dict):
+            if speech in phrase['#text']:
+                identifier = phrase['@id']
+                print("AI Information Identifier ID: " + identifier)
+                for reply in doc['ai_info']['response_list']['response']:
+                    if isinstance(phrase, dict):
+                        if identifier == reply['@id']:
+                            return ReplyFormatter(reply['#text'])
+    return ""
+
+def ReplyFormatter(speech):
+    profile = UserProfile.objects.get(current_profile=True)
+    if "{ ai_name }" in speech:
+        new_reply = re.sub(r'\{[^)]*\}', profile.ai_name , speech)
+        print("Modified Reply: " + new_reply)
+    else:
+        new_reply = speech
+        print("No Modified Values: " + new_reply)
+    return new_reply
 
 def AddBasicGreeting(speech):
     import os
@@ -67,8 +95,13 @@ class ChatbotView(View):
         context = {}
         reply = DetectBasicGreeting(speech)
         if len(reply) == 0:
+            print("Basic Greeting Not Detected")
             reply = DetectSpecificGreeting(speech)
         if len(reply) == 0:
+            print("Specific Greeting Not Detected")
+            reply = DetectAIInformationQuestions(speech)
+        if len(reply) == 0:
+            print("AI Information Not Detected")
             reply = "I have not been trained for that yet."
         context['speech_response'] = reply
         weather_context = {}

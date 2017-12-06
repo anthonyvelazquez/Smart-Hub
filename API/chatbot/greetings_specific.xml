@@ -1,8 +1,12 @@
 <greeting_specific>
 <human id="1">good morning</human>
 <human id="2">good day</human>
+<human id="3">hello how are you</human>
+<human id="4">what is your name</human>
 <response_list>
 <response id="1">Good Morning.</response>
 <response id="2">Good Day.</response>
+<response id="3">Hello. I am doing well. How about you?</response>
+<response id="4">My name is { ai_name }</response>
 </response_list>
 </greeting_specific>

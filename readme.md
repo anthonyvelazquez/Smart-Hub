@@ -28,6 +28,12 @@ These instructions will get you a copy of the project up and running on your loc
 
 * TODO: Add Locations for other devices
 
+#### [Chatbot Module](chatbot-module.md)
+
+* TODO: Remodel Command Routes to use Chatbot
+
+* TODO: Allow multiple replies
+
 ### Installation
 
 To use the project, edit the AI/Credentials.py file with your own credentials for all the services.

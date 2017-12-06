@@ -281,7 +281,6 @@ class VoiceCommandView(View):
             if not found:
                 print("Checking Equation")
                 found, response, request.session['speech_response'], request.session['equation'] = EquationCommandRouter(False, profile, data['command'])
-            
             if not found:
                     # *******************************************
                     # A.I. Commands
@@ -290,7 +289,7 @@ class VoiceCommandView(View):
                     request.session['summary'] = True
                     response = {'status': 200, 'message': "Your error", 'url':reverse('Dashboard')}
                     # *******************************************
-                    # Unknown Commands
+                    # Chatbot Commands
                     # *******************************************
                 else:
                     print("Unknown Command: " + data['command'])
