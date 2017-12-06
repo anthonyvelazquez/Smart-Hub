@@ -11,6 +11,7 @@ class UserProfile(models.Model):
     
     ai_voice = models.TextField(null=True, default=None, blank=True)
     ai_name = models.TextField(null=True, default=None, blank=True)
+    ai_gender = models.TextField(null=True, default=None, blank=True)
     ai_setting_name = models.BooleanField(default=False)
     ai_setting_gender = models.BooleanField(default=False)
 

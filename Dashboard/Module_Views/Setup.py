@@ -61,8 +61,10 @@ class AISetupGenderView(View):
         profile.ai_gender = request.session['ai_info']
         if "woman" in request.session['ai_info'] or "female" in request.session['ai_info']:
             profile.ai_voice = "UK English Female"
+            profile.ai_gender = "female"
         else:
             profile.ai_voice = "UK English Male"
+            profile.ai_gender = "male"
         profile.save()
         context['current_date'] = datetime.datetime.now()
         GetProfileWeather(profile, weather_context)

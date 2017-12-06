@@ -1,0 +1,10 @@
+<personal_info>
+<human id="0">who am I</human>
+<human id="0">what is my name</human>
+<human id="1">what is my address</human>
+<human id="1">where do I live</human>
+<response_list>
+<response id="0">You are { f_name }.</response>
+<response id="1">Your address is { address }.</response>
+</response_list>
+</personal_info>

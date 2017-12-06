@@ -17,7 +17,7 @@ import xml.etree.ElementTree
 
 def SpeechFromXML(speech):
     base_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-    folder = base_dir + '/API/chatbot/'
+    folder = base_dir + "\\API\\chatbot\\"
     import glob
     # Grab all XML Filenames
     for filename in glob.glob(folder + '*.xml'):
@@ -63,7 +63,19 @@ def ReplyFormatter(speech):
     profile = UserProfile.objects.get(current_profile=True)
     if "{ ai_name }" in speech:
         new_reply = re.sub(r'\{[^)]*\}', profile.ai_name , speech)
-        print("Modified Reply: " + new_reply)
+        print("Modified Name Reply: " + new_reply)
+    elif "{ ai_gender }" in speech:
+        new_reply = re.sub(r'\{[^)]*\}', profile.ai_gender , speech)
+        print("Modified Gender Reply: " + new_reply)
+    elif "{ f_name }" in speech:
+        new_reply = re.sub(r'\{[^)]*\}', profile.first_name , speech)
+        print("Modified Name Reply: " + new_reply)
+    elif "{ l_name }" in speech:
+        new_reply = re.sub(r'\{[^)]*\}', profile.last_name , speech)
+        print("Modified Name Reply: " + new_reply)
+    elif "{ address }" in speech:
+        new_reply = re.sub(r'\{[^)]*\}', profile.address , speech)
+        print("Modified Address Reply: " + new_reply)
     else:
         new_reply = speech
         print("No Modified Values: " + new_reply)
