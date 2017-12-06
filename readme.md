@@ -27,3 +27,10 @@ These instructions will get you a copy of the project up and running on your loc
 * TODO: Add Photo Functionality
 
 * TODO: Add Locations for other devices
+
+### Installation
+
+To use the project, edit the AI/Credentials.py file with your own credentials for all the services.
+Create a virtual environment and do "pip install -r requirements.txt".
+After everything installs then just start your Django server with "python manage.py runserver".
+Navigate to the url and you can begin testing.
