@@ -1,8 +1,8 @@
 global Gmail_Email
-Gmail_Email = "username" # No need for @gmail part
+Gmail_Email = "???" # No need for @gmail part
 global Gmail_Password
-Gmail_Password = "password"
+Gmail_Password = "???"
 global iCloud_Email
-iCloud_Email = "username@icloud.com"
+iCloud_Email = "???@icloud.com"
 global iCloud_Password
-iCloud_Password = "password"
+iCloud_Password = "???"

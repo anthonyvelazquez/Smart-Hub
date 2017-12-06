@@ -1,0 +1,8 @@
+<greeting_specific>
+<human id="1">good morning</human>
+<human id="2">good day</human>
+<response_list>
+<response id="1">Good Morning.</response>
+<response id="2">Good Day.</response>
+</response_list>
+</greeting_specific>

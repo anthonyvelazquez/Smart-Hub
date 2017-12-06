@@ -1,0 +1,8 @@
+<greeting_basic>
+<human>hello</human>
+<human>hi</human>
+<response_list>
+<response>Hello.</response>
+<response>Hi.</response>
+</response_list>
+</greeting_basic>

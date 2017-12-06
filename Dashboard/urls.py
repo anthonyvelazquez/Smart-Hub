@@ -8,6 +8,7 @@ from Dashboard.Module_Views.Email import *
 from Dashboard.Module_Views.Apple import *
 from Dashboard.Module_Views.LoL import *
 from Dashboard.Module_Views.Weather import *
+from Dashboard.Module_Views.Chatbot import *
 from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
@@ -19,8 +20,8 @@ urlpatterns = [
     url(r'^Setup/AI/Name$', AISetupNameView.as_view(), name='AI_Setup_Name'),
     url(r'^Setup/AI/Gender/Request$', AISetupGenderRequestView.as_view(), name='AI_Setup_Gender_Request'),
     url(r'^Setup/AI/Gender$', AISetupGenderView.as_view(), name='AI_Setup_Gender'),
-    url(r'^Profile$', views.ProfileView.as_view(), name='Profile'),
-    url(r'^Profile/Create$', views.CreateProfileView.as_view(), name='Profile_Create'),
+    url(r'^Setup/Profile$', views.ProfileView.as_view(), name='Profile'),
+    url(r'^Setup/Profile/Create$', views.CreateProfileView.as_view(), name='Profile_Create'),
     # *******************************************
     # Alarm
     # *******************************************
@@ -80,7 +81,7 @@ urlpatterns = [
     # *******************************************
     url(r'^Search/Request$', views.SearchRequestView.as_view(), name='Search_Request'),
     url(r'^Search/Result$', views.SearchResultView.as_view(), name='Search_Result'),
-    url(r'^Conversation$', views.ConversationView.as_view(), name='Conversation'),
+    url(r'^Chatbot/(?P<speech>[^/]+)$', ChatbotView.as_view(), name='Chatbot'),
 ]
 
 # https://docs.smart-mirror.io/docs/configure_the_mirror.html#giphy

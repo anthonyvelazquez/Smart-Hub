@@ -7,6 +7,7 @@ from Dashboard.models import UserProfile, Alarms, Reminders
 
 from API.Functions import *
 from AI.CommandFilter import *
+from AI.Chatbot import *
 
 Testing = False
 
@@ -42,7 +43,7 @@ class DashboardView(View):
             end = time.time()
             print("Holidays:" + str(end - start))
             start = time.time()
-            GetAppleIphoneInformation(profile, apple_context)
+            # GetAppleIphoneInformation(profile, apple_context)
             context.update(apple_context)
             end = time.time()
             print("Apple:" + str(end - start))
@@ -216,29 +217,6 @@ class SearchResultView(View):
         context['image_link'] = results[0]['link']
         return render(request, "search.html", context=context)
 
-class ConversationView(View):
-    def get(self, request):
-        data = request.session['convo']
-        context = {}
-        if "who are you" in data:
-            context['speech_response'] = "My name is Chicken Mc Noodle French Fry. I am a self learning AI built in Python and Django. I can pretty much do anything for you for the most part."
-        elif "who is Huey" in data or "who is he" in data or "who is you" in data:
-            context['speech_response'] = "He is Megans brother. He plays Rainbow Seige on his Xbox. He lives in Woodland Park. Also he is wearing a white shirt and sweats. Yeah thats right, I can see you."
-        elif "do I have anything planned for today" in data or "what are my plans for today" in data:
-            context['speech_response'] = "I dont know. You did not program that in me."
-        elif "good night" in data:
-            request.session['speech_response'] = "Goodnight. Activating Sleep Mode"
-            return redirect('Sleep')
-        else:
-            context['speech_response'] = "I dont know how to reply to that."
-        weather_context = {}
-        profile = UserProfile.objects.get(current_profile=True)
-        context['current_date'] = datetime.datetime.now()
-        GetProfileWeather(profile, weather_context)
-        context.update(weather_context)
-        context['ai_voice'] = profile.ai_voice
-        return render(request, "mirror.html", context=context)
-
 class VoiceCommandView(View):
     def post(self, request):
         data = request.POST
@@ -316,9 +294,10 @@ class VoiceCommandView(View):
                     # *******************************************
                 else:
                     print("Unknown Command: " + data['command'])
-                    request.session['convo'] = data['command']
-                    response = {'status': 200, 'message': "Your error", 'url':reverse('Conversation')} 
+                    response = ChatbotCommandRouter(data['command'])
         import json
         return HttpResponse(json.dumps(response), content_type='application/json')
 # https://github.com/clayshieh/PySMS
 # https://www.hackster.io/tinkernut/diy-vintage-spotify-radio-using-a-raspberry-pi-bc3322
+# https://github.com/tweepy/tweepy
+# https://kamranicus.com/guides/raspberry-pi-3-baby-monitor#the-hardware
