@@ -125,25 +125,6 @@ class CreateProfileView(View):
         UserProfile.objects.create()
         return redirect('Profile')
 
-class DisplayWeatherView(View):
-    def get(self, request):
-        data = request.session['weather'].replace("show me the weather for ", "")
-        data = data.replace("show me the weather in ", "")
-        data = data.replace("what is the weather in ", "")
-        data = data.replace("what is the weather for ", "")
-        data = data.replace("what's the weather in ", "")
-        data = data.replace("what's the weather for ", "")
-        print(data)
-        profile = UserProfile.objects.get(current_profile=True)
-        context = {}
-        weather_context = {}
-        context['current_date'] = datetime.datetime.now()
-        GetWeather(weather_context, data)
-        context.update(weather_context)
-        context['speech_response'] = "This is the weather for " + data
-        context['ai_voice'] = profile.ai_voice
-        return render(request, "weather.html", context=context)
-
 class MathRequestView(View):
     def get(self, request):
         context = {}
@@ -280,18 +261,21 @@ class VoiceCommandView(View):
             response = AppleCommandRouter(True, profile, data['command'])
         elif profile.search_active:
             print("Search is Active: " + data['command'])
-            response, request.session['speech_response'], request.session['search'] = SearchCommandFilter(True, profile, data['command'])
+            response, request.session['speech_response'], request.session['search'] = SearchCommandRouter(True, profile, data['command'])
         elif profile.reminder_create_active:
             print("Reminder is Active: " + data['command'])
-            response, request.session['reminder'] = ReminderCommandFilter(True, profile, data['command'])
+            response, request.session['reminder'] = ReminderCommandRouter(True, profile, data['command'])
         elif profile.math_request_active:
             print("Math is Active: " + data['command'])
-            response, request.session['equation'] = EquationCommandFilter(True, profile, data['command'])
+            response, request.session['equation'] = EquationCommandRouter(True, profile, data['command'])
+        elif profile.weather_picking_location:
+            print("Weather Search Active: " + data['command'])
+            response = WeatherCommandRouter(True, data['command'])
         else:
             # if "find my iPhone" in data['command']:
             #     response = {'status': 200, 'message': "Your error", 'url':reverse('iPhone')}
             print("Checking Navigation")
-            found, response, request.session['speech_response'] = NavigationCommandFilter(data['command'])
+            found, response, request.session['speech_response'] = NavigationCommandRouter(data['command'])
             if not found:
                 print("Checking Setup")
                 found, response = AISetupCommandRouter(False, 1, profile, data['command'])
@@ -303,10 +287,10 @@ class VoiceCommandView(View):
                 found, response = AlarmCommandRouter(False, profile, data['command'])
             if not found:
                 print("Checking Search")
-                found, response, request.session['speech_response'] = SearchCommandFilter(False, profile, data['command'])
+                found, response, request.session['speech_response'] = SearchCommandRouter(False, profile, data['command'])
             if not found:
                 print("Checking Reminder")
-                found, response = ReminderCommandFilter(False, profile, data['command'])
+                found, response = ReminderCommandRouter(False, profile, data['command'])
             if not found:
                 print("Checking Email")
                 found, response = EmailCommandRouter(profile, data['command'])
@@ -315,10 +299,10 @@ class VoiceCommandView(View):
                 found, response = AppleCommandRouter(False, profile, data['command'])
             if not found:
                 print("Checking Weather")
-                found, response, request.session['weather'] = WeatherCommandFilter(data['command'])
+                found, response = WeatherCommandRouter(False, data['command'])
             if not found:
                 print("Checking Equation")
-                found, response, request.session['speech_response'], request.session['equation'] = EquationCommandFilter(False, profile, data['command'])
+                found, response, request.session['speech_response'], request.session['equation'] = EquationCommandRouter(False, profile, data['command'])
             
             if not found:
                     # *******************************************

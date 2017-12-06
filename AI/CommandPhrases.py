@@ -72,8 +72,11 @@ Generic_Sleep_Disable_Commands_List = [
 # *******************************************
 # Setup Commands
 # *******************************************
-Initial_Setup_Commands_List = [
-    'start initial setup',
+AI_Name_Setup_Commands_List = [
+    'start name setup',
+    ]
+AI_Gender_Setup_Commands_List = [
+    'start gender setup',
     ]
 # *******************************************
 # Email Commands
@@ -89,4 +92,11 @@ Generic_Apple_Find_iPhone_Commands_List = [
     'find my iPhone',
     "find my iPhone's location",
     "where is my iPhone"
+    ]
+# *******************************************
+# Weather Commands
+# *******************************************
+Current_Weather_Location_Commands_List = [
+    "can you look up the current weather",
+    "what is the current weather",
     ]

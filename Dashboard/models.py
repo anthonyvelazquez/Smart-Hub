@@ -40,6 +40,7 @@ class UserProfile(models.Model):
     weather_updated = models.DateTimeField(null=True, default=None, blank=True)
     sunrise = models.DateTimeField(null=True, default=None, blank=True)
     sunset = models.DateTimeField(null=True, default=None, blank=True)
+    weather_picking_location = models.BooleanField(default=False)
 
 class Alarms(models.Model):
     profile = models.ForeignKey(UserProfile, null=True, default=None, blank=True)

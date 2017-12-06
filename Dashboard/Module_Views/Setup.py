@@ -70,3 +70,20 @@ class AISetupGenderView(View):
         context['speech_response'] = "Ok I am now a " + request.session['ai_info']
         context['ai_voice'] = profile.ai_voice
         return redirect('Dashboard')
+
+class ProfileNameSetupView(View):
+    def get(self, request):
+        context = {}
+        weather_context = {}
+        profile = UserProfile.objects.get(current_profile=True)
+        if "woman" in request.session['ai_info'] or "female" in request.session['ai_info']:
+            profile.ai_voice = "UK English Female"
+        else:
+            profile.ai_voice = "UK English Male"
+        profile.save()
+        context['current_date'] = datetime.datetime.now()
+        GetProfileWeather(profile, weather_context)
+        context.update(weather_context)
+        context['speech_response'] = "Ok I am now a " + request.session['ai_info']
+        context['ai_voice'] = profile.ai_voice
+        return redirect('Dashboard')

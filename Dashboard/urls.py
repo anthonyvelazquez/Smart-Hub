@@ -6,6 +6,8 @@ from Dashboard.Module_Views.Reminder import *
 from Dashboard.Module_Views.Setup import *
 from Dashboard.Module_Views.Email import *
 from Dashboard.Module_Views.Apple import *
+from Dashboard.Module_Views.LoL import *
+from Dashboard.Module_Views.Weather import *
 from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
@@ -36,14 +38,23 @@ urlpatterns = [
     # *******************************************
     url(r'^Email/List/Unread$', EmailUnreadListView.as_view(), name='Email_Unread_List'),
     # *******************************************
+    # League of Legends
+    # *******************************************
+    url(r'^LoL/Me$', SelfLoLProfileView.as_view(), name='LoL_Me'),
+    # *******************************************
     # Apple
     # *******************************************
     url(r'^Apple/iPhone/Find$', AppleFindiPhoneView.as_view(), name='Apple_Find_iPhone'),
     url(r'^Apple/iPhone/Find/Ping/(?P<response>[^/]+)$', AppleFindiPhonePingRequestView.as_view(), name='Apple_Find_iPhone_Ping_Request'),
     # *******************************************
+    # Weather
+    # *******************************************
+    url(r'^Weather/Current/Request$', CurrentWeatherRequestView.as_view(), name='Current_Weather_Request'),
+    url(r'^Weather/Current/Here$', CurrentWeatherHereView.as_view(), name='Current_Weather_Here'),
+    url(r'^Weather/Current/Search/(?P<location>[^/]+)$', CurrentWeatherSearchView.as_view(), name='Current_Weather_Search'),
+    # *******************************************
     # Alarm
     # *******************************************
-    url(r'^Weather$', views.DisplayWeatherView.as_view(), name='Weather_Display'),
     url(r'^Setup/(?P<profile_id>[^/]+)$', views.SetupView.as_view(), name='Setup'),
     url(r'^Command$', csrf_exempt(views.VoiceCommandView.as_view()), name='Voice_Command'),
     url(r'^Math/Request$', views.MathRequestView.as_view(), name='Math_Request'),

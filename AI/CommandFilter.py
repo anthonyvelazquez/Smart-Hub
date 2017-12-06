@@ -21,9 +21,12 @@ def AISetupCommandRouter(active, section, profile, command):
             return response, gender
     else:
         found = False
-        if any(command in command_list for command_list in Initial_Setup_Commands_List):
+        if any(command in command_list for command_list in AI_Name_Setup_Commands_List):
             found = True
             response = {'status': 200, 'message': "Your error", 'url':reverse('AI_Setup_Name_Request')}
+        elif any(command in command_list for command_list in AI_Gender_Setup_Commands_List):
+            found = True
+            response = {'status': 200, 'message': "Your error", 'url':reverse('AI_Setup_Gender_Request')}
         else:
             response = {'status': 0, 'message': "Your error", 'url':reverse('Profile')}
         return found, response
@@ -116,7 +119,7 @@ def SleepCommandRouter(active, profile, command):
 # *******************************************
 # Search Commands
 # *******************************************
-def SearchCommandFilter(active, profile, command):
+def SearchCommandRouter(active, profile, command):
     if active:
         speech_response = "This is what I found for. " + command
         profile.search_active = False
@@ -136,7 +139,7 @@ def SearchCommandFilter(active, profile, command):
 # *******************************************
 # Reminder Commands
 # *******************************************
-def ReminderCommandFilter(creating, profile, command):
+def ReminderCommandRouter(creating, profile, command):
     if creating:
         reminder = command
         response = {'status': 200, 'message': "Your error", 'url':reverse('Reminder')}
@@ -191,7 +194,7 @@ def AppleCommandRouter(active, profile, command):
 # *******************************************
 # Equation Commands
 # *******************************************
-def EquationCommandFilter(asking, profile, command):
+def EquationCommandRouter(asking, profile, command):
     if asking:
         equation = command
         profile.math_request_active = False
@@ -221,7 +224,7 @@ def EquationCommandFilter(asking, profile, command):
 # *******************************************
 # Navigation Commands
 # *******************************************
-def NavigationCommandFilter(command):
+def NavigationCommandRouter(command):
     found = False
     if "dashboard" in command:
         found = True
@@ -238,13 +241,15 @@ def NavigationCommandFilter(command):
 # *******************************************
 # Weather Commands
 # *******************************************
-def WeatherCommandFilter(command):
-    found = False
-    if "show me the weather" in command or "what is the weather" in command or "what's the weather" in command:
-        found = True
-        location = command
-        response = {'status': 200, 'message': "Your error", 'url':reverse('Weather_Display')}
+def WeatherCommandRouter(active, command):
+    if active:
+        response = {'status': 200, 'message': "Your error", 'url':reverse('Current_Weather_Search', kwargs={'location':command})}
+        return response
     else:
-        response = ""
-        location = ""
-    return found, response, location
+        found = False
+        if any(command in command_list for command_list in Current_Weather_Location_Commands_List):
+            found = True
+            response = {'status': 200, 'message': "Your error", 'url':reverse('Current_Weather_Request')}
+        else:
+            response = ""
+    return found, response
