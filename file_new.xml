@@ -4,5 +4,5 @@
 <response_list>
 <response>Hello.</response>
 <response>Hi.</response>
-<response x="1">New Greeting</response></response_list>
+<response x="1" y="abc">New Greeting</response></response_list>
 </greeting_basic>

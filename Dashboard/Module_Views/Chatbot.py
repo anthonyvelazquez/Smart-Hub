@@ -11,54 +11,53 @@ from API.Functions import *
 import xmltodict
 import re
 from random import randint
+import os
+import xml.etree.ElementTree
 
-def DetectBasicGreeting(speech):
-    found = False
-    import os
-    base_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-    file = base_dir + '/API/chatbot/greetings_basic.xml'
-    fd = open(file,"r")
-    doc = xmltodict.parse(fd.read())
-    reply_length = len( doc['greeting_basic']['response_list']['response'])
-    reply_choices = randint(0,reply_length) - 1
-    for phrase in doc['greeting_basic']['human']:
-        if speech in phrase:
-            return doc['greeting_basic']['response_list']['response'][reply_choices]
-    return ""
 
-def DetectSpecificGreeting(speech):
-    import os
+def SpeechFromXML(speech):
     base_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-    file = base_dir + '/API/chatbot/greetings_specific.xml'
-    fd = open(file,"r")
-    doc = xmltodict.parse(fd.read())
-    for phrase in doc['greeting_specific']['human']:
-        if isinstance(phrase, dict):
-            if speech in phrase['#text']:
-                identifier = phrase['@id']
-                print("Specific Greeting Identifier ID: " + identifier)
-                for reply in doc['greeting_specific']['response_list']['response']:
-                    if isinstance(phrase, dict):
-                        if identifier == reply['@id']:
-                            return ReplyFormatter(reply['#text'])
-    return ""
-
-def DetectAIInformationQuestions(speech):
-    import os
-    base_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-    file = base_dir + '/API/chatbot/ai_information.xml'
-    fd = open(file,"r")
-    doc = xmltodict.parse(fd.read())
-    for phrase in doc['ai_info']['human']:
-        if isinstance(phrase, dict):
-            if speech in phrase['#text']:
-                identifier = phrase['@id']
-                print("AI Information Identifier ID: " + identifier)
-                for reply in doc['ai_info']['response_list']['response']:
-                    if isinstance(phrase, dict):
-                        if identifier == reply['@id']:
-                            return ReplyFormatter(reply['#text'])
-    return ""
+    folder = base_dir + '/API/chatbot/'
+    import glob
+    # Grab all XML Filenames
+    for filename in glob.glob(folder + '*.xml'):
+        print("Checking File:" + filename)
+        # Open each file and turn to dict
+        file = open(filename,"r")
+        xmldict = xmltodict.parse(file.read())
+        # Get root name
+        et = xml.etree.ElementTree.parse(filename)
+        root = et.getroot().tag
+        # Check human words
+        for phrase in xmldict[root]['human']:
+            # Check if its a matching conversation or generic
+            if isinstance(phrase, dict):
+                if speech in phrase['#text']:
+                    # Found the match now get the ID so you can match a reply
+                    identifier = phrase['@id']
+                    print(root + " Identifier ID: " + identifier)
+                    # Check every response in response_list for a match
+                    # Check if there are multiple replies available that have an ID
+                    specific_replies = [] 
+                    for reply in xmldict[root]['response_list']['response']:
+                        if isinstance(reply, dict):
+                            if identifier == reply['@id']:
+                                specific_replies.append(reply['#text'])
+                    # Get length of list and select random reply
+                    length = len(specific_replies)
+                    return ReplyFormatter(specific_replies[randint(0, length-1)])
+            else:
+                if speech in phrase:
+                    # Get list of generic replies available
+                    generic_replies = []
+                    for reply in xmldict[root]['response_list']['response']:
+                        if not isinstance(reply, dict):
+                            generic_replies.append(reply)
+                    # Get length of list and select random reply
+                    length = len(generic_replies)
+                    return ReplyFormatter(generic_replies[randint(0, length-1)])
+    # Didnt find any matches
+    return "I have not been trained for that yet"
 
 def ReplyFormatter(speech):
     profile = UserProfile.objects.get(current_profile=True)
@@ -71,16 +70,15 @@ def ReplyFormatter(speech):
     return new_reply
 
 def AddBasicGreeting(speech):
-    import os
     base_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
     file = base_dir + '/API/chatbot/greetings_basic.xml'
     fd = open(file,"r")
     doc = xmltodict.parse(fd.read())
-    import xml.etree.ElementTree
     et = xml.etree.ElementTree.parse(file)
 
     # Append new tag: <a x='1' y='abc'>body text</a>
     # new_tag = xml.etree.ElementTree.SubElement(et.getroot(), 'response')
+    print("Root Name: " + et.getroot().tag)
     new_tag = xml.etree.ElementTree.SubElement(et.find('response_list'), 'response')
     new_tag.text = 'New Greeting'
     new_tag.attrib['x'] = '1' # must be str; cannot be an int
@@ -93,16 +91,7 @@ def AddBasicGreeting(speech):
 class ChatbotView(View):
     def get(self, request, speech):
         context = {}
-        reply = DetectBasicGreeting(speech)
-        if len(reply) == 0:
-            print("Basic Greeting Not Detected")
-            reply = DetectSpecificGreeting(speech)
-        if len(reply) == 0:
-            print("Specific Greeting Not Detected")
-            reply = DetectAIInformationQuestions(speech)
-        if len(reply) == 0:
-            print("AI Information Not Detected")
-            reply = "I have not been trained for that yet."
+        reply = SpeechFromXML(speech)
         context['speech_response'] = reply
         weather_context = {}
         profile = UserProfile.objects.get(current_profile=True)
