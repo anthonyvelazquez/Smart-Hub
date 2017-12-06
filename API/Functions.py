@@ -12,7 +12,7 @@ import email
 from gnewsclient import gnewsclient
 gmaps = googlemaps.Client(key='AIzaSyBrYIZY34HfYPrhUr7pkecChHstvs64nsY')
 from pyicloud import PyiCloudService
-
+from AI.Credentials import *
 def GetProfileWeather(profile, context):
     #https://github.com/csparpa/pyowm
     #print(profile.weather_updated)
@@ -71,7 +71,7 @@ def GetHolidays(profile, context):
     context['holidays'] = upcoming
 
 def GetAppleIphoneInformation(profile, context):
-        api = PyiCloudService('anthonyhvelazquez@icloud.com', 'Velazquez185934')
+        api = PyiCloudService(iCloud_Email, iCloud_Password)
         devices = api.devices
         dev_name = []
         dev_batt = []
@@ -125,8 +125,8 @@ def PingAppleIphoneFromID(profile, context):
 def GetUnreadEmailsGmail(context):
         # https://codehandbook.org/how-to-read-email-from-gmail-using-python/
         ORG_EMAIL   = "@gmail.com"
-        FROM_EMAIL  = "anthonyhvelazquez" + ORG_EMAIL
-        FROM_PWD    = "velazquez1"
+        FROM_EMAIL  = Gmail_Email + ORG_EMAIL
+        FROM_PWD    = Gmail_Password
         SMTP_SERVER = "imap.gmail.com"
         SMTP_PORT   = 993
         fromlist = []
