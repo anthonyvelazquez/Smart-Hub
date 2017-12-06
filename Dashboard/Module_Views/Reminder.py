@@ -5,7 +5,7 @@ from django.views.generic import TemplateView, View
 import datetime
 from datetime import timedelta
 from django.utils import timezone
-from Dashboard.models import UserProfile, Alarms
+from Dashboard.models import UserProfile, Alarms, Reminders
 import AI.CommandPhrases
 from API.Functions import *
 
