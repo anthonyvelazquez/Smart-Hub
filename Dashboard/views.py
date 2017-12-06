@@ -278,9 +278,9 @@ class VoiceCommandView(View):
             if not found:
                 print("Checking Weather")
                 found, response = WeatherCommandRouter(False, data['command'])
-            if not found:
-                print("Checking Equation")
-                found, response, request.session['speech_response'], request.session['equation'] = EquationCommandRouter(False, profile, data['command'])
+            # if not found:
+            #     print("Checking Equation")
+            #     found, response, request.session['speech_response'], request.session['equation'] = EquationCommandRouter(False, profile, data['command'])
             if not found:
                     # *******************************************
                     # A.I. Commands
