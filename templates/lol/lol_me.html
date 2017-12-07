@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2" style="color: white;">
+                <h5>{{current_date|date:"D N d Y"}}</h5>
+                <h1 id="time"></h1>
+        </div>
+        <div class="col-md-8" style="color: white;text-align:center;">
+            
+        </div>
+        <div class="col-md-2" style="color: white;text-align:right;">
+            <h5><i class="fa fa-sun-o" aria-hidden="true"></i> Sunrise: {{sunrise|date:"P"}}</h5>
+            <h5><i class="fa fa-moon-o" aria-hidden="true"></i> Sunset: {{sunset|date:"P"}}</h5>
+            <h1><i class="fa fa-cloud" aria-hidden="true"> {{weather|floatformat:"0"}} F</i></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-1" style="color: white;">
+        </div>
+        <div class="col-md-5" style="color: white; text-align:center;">
+                <strong>Personal League of Legends Information</strong>
+                <hr>
+                <h4 style="text-align:left;">Summoner Name: {{profile.name}}</h4>
+                <h4 style="text-align:left;">Summoner Level: {{profile.summonerLevel}}</h4>
+            </div>
+        <div class="col-md-5" style="color: white; text-align:center;">
+            <strong>League of Legends Statistics</strong>
+            <hr>
+            <table class="table table-condensed table-hover">
+              <thead>
+                <tr>
+                  <th style="text-align:left"><strong>Tier</strong></th>
+                  <th style="text-align:left"><strong>League Name</strong></th>
+                  <th style="text-align:left"><strong>Points</strong></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                    <td>Ranked Solo Stats</td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                <tr>
+                    <td style="text-align:left">{{stats.0.tier}}</td>
+                    <td style="text-align:left">{{stats.0.leagueName}}</td>
+                    <td style="text-align:left">{{stats.0.leaguePoints}}</td>
+                </tr>
+                <tr>
+                    <td>Ranked Flex Stats</td>
+                    <td> </td>
+                    <td> </td>
+                </tr>
+                <tr>
+                        <td style="text-align:left">{{stats.1.tier}}</td>
+                        <td style="text-align:left">{{stats.1.leagueName}}</td>
+                        <td style="text-align:left">{{stats.1.leaguePoints}}</td>
+                    </tr>
+              </tbody>
+            </table>
+        
+        </div>
+    
+        <div class="col-md-1" style="color: white;">
+        </div>
+    </div>
+    <div class="row">
+            <div class="col-md-2" style="color: white;margin-top:10%;">
+            </div>
+            <div class="col-md-8" style="color: white; text-align:center;margin-top:10%;">
+            <div class="col-md-2" style="color: white;">
+            </div>
+        </div>
+    <div class="row">
+            <div class="col-md-4" style="color: white;margin-top:15%;">
+            </div>
+            <div class="col-md-5" style="color: white; text-align:center;">
+
+            </div>
+            <div class="col-md-3" style="color: white;margin-top:10%;">
+            </div>
+    </div>
+    <div class="row">
+            <div class="col-md-3" style="color: white;">
+            </div>
+            <div class="col-md-6" style="color: white; text-align:center;margin-top:5%;">
+            </div>
+            <div class="col-md-2 col-md-offset-1" style="text-align:center;color: white;margin-top:5%;">
+            </div>
+        </div>
+</div>
+<script>
+    console.log("{{stats}}")
+</script>
+
+{% endblock %}>

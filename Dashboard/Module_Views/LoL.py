@@ -4,8 +4,9 @@ from django.http import HttpResponse
 from django.views.generic import TemplateView, View
 from Dashboard.models import UserProfile, Alarms
 from riotwatcher import RiotWatcher
+from django.utils.encoding import smart_str
+from AI.Credentials import *
 watcher = RiotWatcher('RGAPI-fddcba42-f729-4eed-a2cd-d6d745629fee') 
-my_region = 'na1'
 
 
 class SelfLoLProfileView(View):
@@ -13,11 +14,13 @@ class SelfLoLProfileView(View):
         # http://riot-watcher.readthedocs.io/en/latest/
         context = {}
         profile = UserProfile.objects.get(current_profile=True)
-        me = watcher.summoner.by_name(my_region, 'Top Raidboss')
-        print(me)
+        me = watcher.summoner.by_name(League_Summoner_Region, League_Summoner_Name)
+        me2 = watcher.league.positions_by_summoner(League_Summoner_Region, me['id'])
+        context['profile'] = me
+        context['stats'] = me2
         context['speech_response'] = "These are your League of Legends statistics."
         context['ai_voice'] = profile.ai_voice
-        return render(request, "sleep.html", context=context)
+        return render(request, "lol/lol_me.html", context=context)
 
 
 
