@@ -17,7 +17,16 @@ import xml.etree.ElementTree
 
 def SpeechFromXML(speech):
     base_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-    folder = base_dir + "\\API\\chatbot\\"
+    from sys import platform
+    if platform == "linux" or platform == "linux2":
+        print("Linux System")
+        folder = base_dir + "\\API\\chatbot\\"
+    elif platform == "darwin":
+        print("Mac System")
+        folder = base_dir + "/API/chatbot/"
+    elif platform == "win32":
+        print("Windows System")
+        folder = base_dir + "\\API\\chatbot\\"
     import glob
     # Grab all XML Filenames
     for filename in glob.glob(folder + '*.xml'):
