@@ -124,3 +124,25 @@ class ChatbotView(View):
 
 # http://docs.python-guide.org/en/latest/scenarios/xml/
 # xmltodict
+# https://pyspotify.mopidy.com/en/latest/
+# http://praw.readthedocs.io/en/latest/code_overview/reddit_instance.html
+# https://code.google.com/archive/p/python-twitter/
+# https://github.com/goldsmith/Wikipedia
+# https://pypi.python.org/pypi/youtube-api-wrapper/0.2
+# https://github.com/unwitting/bitstampy
+# https://github.com/timotheus/ebaysdk-python
+# https://github.com/python-fedex-devs/python-fedex
+# https://github.com/simon-weber/gmusicapi
+# https://github.com/wkoot/python-instagram
+# https://github.com/kirkthaker/investopedia-trading-api
+# https://medium.com/@gon.esbuyo/get-started-with-nlp-part-i-d67ca26cc828
+# http://textblob.readthedocs.io/en/dev/
+# https://developer.uber.com/docs/riders/guides/client-libraries
+# https://www.ups.com/upsdeveloperkit
+# https://github.com/rienafairefr/pynYNAB
+# look up Sh
+# look up Python-docx
+# https://www.faceplusplus.com/pricing/
+# https://developer.musixmatch.com/plans
+# https://rapidapi.com/user/spoonacular/package/Recipe%20-%20Food%20-%20Nutrition/pricing
+# https://www.reddit.com/r/webdev/comments/3wrswc/what_are_some_fun_apis_to_play_with/

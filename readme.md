@@ -34,6 +34,15 @@ These instructions will get you a copy of the project up and running on your loc
 
 * TODO: Allow multiple replies
 
+#### [Reddit Module](chatbot-module.md)
+
+* TODO: Add Reddit Integration
+
+#### [Spotify Module](chatbot-module.md)
+
+* TODO: Add Spotify Integration
+
+
 ### Installation
 
 To use the project, edit the AI/Credentials.py file with your own credentials for all the services.
