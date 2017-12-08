@@ -3,18 +3,18 @@ from django.urls import reverse
 from django.http import HttpResponse
 from django.views.generic import TemplateView, View
 from Dashboard.models import UserProfile, Alarms
-from uber_rides.session import Session
-from uber_rides.client import UberRidesClient
+# from uber_rides.session import Session
+# from uber_rides.client import UberRidesClient
 
 class UberView(View):
     def get(self, request):
         context = {}
-        import ipdb; ipdb.set_trace()
-        session = Session(server_token="xGWJMYoHAo-jtiwSixmj5oFe_2EqGjct9uXwxNaJ")
-        client = UberRidesClient(session)
-        response = client.get_products(37.77, -122.41)
-        products = response.json.get('products')
-        product_id = products[0].get('product_id')
+        # import ipdb; ipdb.set_trace()
+        # session = Session(server_token="xGWJMYoHAo-jtiwSixmj5oFe_2EqGjct9uXwxNaJ")
+        # client = UberRidesClient(session)
+        # response = client.get_products(37.77, -122.41)
+        # products = response.json.get('products')
+        # product_id = products[0].get('product_id')
         # estimate = client.estimate_ride(
         #     product_id=product_id,
         #     start_latitude=37.77,
