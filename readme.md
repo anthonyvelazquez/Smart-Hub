@@ -46,6 +46,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 * TODO: Add Reddit Integration
 
+#### [Twitter Module](twitter-module.md)
+
+* TODO: Add Twitter Integration
+
 #### [Spotify Module](chatbot-module.md)
 
 * TODO: Add Spotify Integration

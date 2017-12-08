@@ -56,7 +56,8 @@ class CryptoDisplayView(View):
                 context['crypto'] = crypto
                 break
         if not found:
-            context['speech_response'] = "I could not find that coin in the market."
+            request.session['speech_response'] = "I could not find that coin in the market."
+            redirect('Dashboard')
         else:
             context['speech_response'] = "This is what I found for " + found_coin['name']
         context['ai_voice'] = profile.ai_voice

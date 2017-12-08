@@ -117,9 +117,10 @@ class DeleteAlarmRequestView(View):
         context['current_date'] = datetime.datetime.now()
         GetProfileWeather(profile, weather_context)
         context.update(weather_context)
+        context['request_name'] = "Alarm Deletion"
         context['speech_response'] = "What is the name of the alarm you want to delete?"
         context['ai_voice'] = profile.ai_voice
-        return render(request, "mirror.html", context=context)
+        return render(request, "request/simple_request.html", context=context)
 
 class DeleteSpecificAlarmView(View):
     def get(self, request, name):

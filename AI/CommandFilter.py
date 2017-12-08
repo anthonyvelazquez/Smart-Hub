@@ -281,3 +281,18 @@ def CryptoCommandRouter(active, command):
         else:
             response = ""
     return found, response
+# *******************************************
+# Reddit Commands
+# *******************************************
+def RedditCommandRouter(active, command):
+    if active:
+        response = {'status': 200, 'message': "Your error", 'url':reverse('Current_Weather_Search', kwargs={'location':command})}
+        return response
+    else:
+        found = False
+        if any(command in command_list for command_list in Reddit_Dashboard_Commands_List):
+            found = True
+            response = {'status': 200, 'message': "Your error", 'url':reverse('Reddit_Dashboard')}
+        else:
+            response = ""
+    return found, response

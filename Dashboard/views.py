@@ -284,6 +284,9 @@ class VoiceCommandView(View):
             if not found:
                 print("Checking Crypto")
                 found, response = CryptoCommandRouter(False, data['command'])
+            if not found:
+                print("Checking Reddit")
+                found, response = RedditCommandRouter(False, data['command'])
             # if not found:
             #     print("Checking Equation")
             #     found, response, request.session['speech_response'], request.session['equation'] = EquationCommandRouter(False, profile, data['command'])

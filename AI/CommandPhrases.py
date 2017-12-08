@@ -120,3 +120,14 @@ Popular_Coin_Commands_List = [
     "can you look up eth",
     "can you look up LTC"
     ]
+# *******************************************
+# Reddit Commands
+# *******************************************
+Reddit_Dashboard_Commands_List = [
+    "open Reddit",
+    "open my Reddit dashboard",
+    "open my Reddit homepage",
+    "load my Reddit dashboard",
+    "load my Reddit homepage",
+    "Reddit dashboard"
+    ]

@@ -11,6 +11,7 @@ from Dashboard.Module_Views.Weather import *
 from Dashboard.Module_Views.Chatbot import *
 from Dashboard.Module_Views.Uber import *
 from Dashboard.Module_Views.Crypto import *
+from Dashboard.Module_Views.Reddit import *
 from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
@@ -82,6 +83,10 @@ urlpatterns = [
     # Uber
     # *******************************************
     url(r'^Uber/Estimate$', UberView.as_view(), name='Uber'),
+    # *******************************************
+    # Reddit
+    # *******************************************
+    url(r'^Reddit/Dashboard$', RedditDashboardView.as_view(), name='Reddit_Dashbpard'),
     # *******************************************
     # Crypto Currency
     # *******************************************
