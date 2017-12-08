@@ -253,3 +253,18 @@ def WeatherCommandRouter(active, command):
         else:
             response = ""
     return found, response
+# *******************************************
+# Crypto Commands
+# *******************************************
+def CryptoCommandRouter(active, command):
+    if active:
+        response = {'status': 200, 'message': "Your error", 'url':reverse('Crypto_Display', kwargs={'coin':command})}
+        return response
+    else:
+        found = False
+        if any(command in command_list for command_list in Crypto_List_Commands_List):
+            found = True
+            response = {'status': 200, 'message': "Your error", 'url':reverse('Crypto_List')}
+        else:
+            response = ""
+    return found, response

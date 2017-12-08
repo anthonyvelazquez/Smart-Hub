@@ -14,19 +14,56 @@ from random import randint
 import os
 import xml.etree.ElementTree
 
+def FunctionFromXML(speech):
+    base_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+    from sys import platform
+    if platform == "linux" or platform == "linux2":
+        print("Linux System")
+        folder = base_dir + "\\API\\chatbot\\module\\"
+    elif platform == "darwin":
+        print("Mac System")
+        folder = base_dir + "/API/chatbot/module/"
+    elif platform == "win32":
+        print("Windows System")
+        folder = base_dir + "\\API\\chatbot\\module\\"
+    import glob
+    # Grab all XML Filenames
+    for filename in glob.glob(folder + '*.xml'):
+        print("Checking File:" + filename)
+        # Open each file and turn to dict
+        file = open(filename,"r")
+        xmldict = xmltodict.parse(file.read())
+        # Get root name
+        et = xml.etree.ElementTree.parse(filename)
+        root = et.getroot().tag
+        # Check human words
+        for phrase in xmldict[root]['human']:
+            # Check if its a matching conversation or generic
+            if isinstance(phrase, dict):
+                if speech in phrase['#text']:
+                    # Found the match now get the ID so you can match a reply
+                    identifier = phrase['@id']
+                    print(root + " Identifier ID: " + identifier)
+                    for reply in xmldict[root]['response_list']['response']:
+                        if isinstance(reply, dict):
+                            if identifier == reply['@id']:
+                                print("Running Function:" + reply['#text'])
+                                return reply['#text']
+    # Didnt find any matches
+    return ""
 
 def SpeechFromXML(speech):
     base_dir = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
     from sys import platform
     if platform == "linux" or platform == "linux2":
         print("Linux System")
-        folder = base_dir + "\\API\\chatbot\\"
+        folder = base_dir + "\\API\\chatbot\\speech\\"
     elif platform == "darwin":
         print("Mac System")
-        folder = base_dir + "/API/chatbot/"
+        folder = base_dir + "/API/chatbot/speech/"
     elif platform == "win32":
         print("Windows System")
-        folder = base_dir + "\\API\\chatbot\\"
+        folder = base_dir + "\\API\\chatbot\\speech\\"
     import glob
     # Grab all XML Filenames
     for filename in glob.glob(folder + '*.xml'):
@@ -47,7 +84,7 @@ def SpeechFromXML(speech):
                     print(root + " Identifier ID: " + identifier)
                     # Check every response in response_list for a match
                     # Check if there are multiple replies available that have an ID
-                    specific_replies = [] 
+                    specific_replies = []
                     for reply in xmldict[root]['response_list']['response']:
                         if isinstance(reply, dict):
                             if identifier == reply['@id']:
@@ -108,7 +145,7 @@ def AddBasicGreeting(speech):
     # Write back to file
     #et.write('file.xml')
     et.write('file_new.xml')
-
+    
 class ChatbotView(View):
     def get(self, request, speech):
         context = {}
@@ -137,7 +174,6 @@ class ChatbotView(View):
 # https://github.com/kirkthaker/investopedia-trading-api
 # https://medium.com/@gon.esbuyo/get-started-with-nlp-part-i-d67ca26cc828
 # http://textblob.readthedocs.io/en/dev/
-# https://developer.uber.com/docs/riders/guides/client-libraries
 # https://www.ups.com/upsdeveloperkit
 # https://github.com/rienafairefr/pynYNAB
 # look up Sh
@@ -146,3 +182,4 @@ class ChatbotView(View):
 # https://developer.musixmatch.com/plans
 # https://rapidapi.com/user/spoonacular/package/Recipe%20-%20Food%20-%20Nutrition/pricing
 # https://www.reddit.com/r/webdev/comments/3wrswc/what_are_some_fun_apis_to_play_with/
+

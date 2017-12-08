@@ -1,0 +1,74 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-md-2" style="color: white;">
+                <h5>{{current_date|date:"D N d Y"}}</h5>
+                <h1 id="time"></h1>
+        </div>
+        <div class="col-md-8" style="color: white;text-align:center;">
+            
+        </div>
+        <div class="col-md-2" style="color: white;text-align:right;">
+            <h5><i class="fa fa-sun-o" aria-hidden="true"></i> Sunrise: {{sunrise|date:"P"}}</h5>
+            <h5><i class="fa fa-moon-o" aria-hidden="true"></i> Sunset: {{sunset|date:"P"}}</h5>
+            <h1><i class="fa fa-cloud" aria-hidden="true"> {{weather|floatformat:"0"}} F</i></h1>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-2" style="color: white;">
+        </div>
+        <div class="col-md-8" style="color: white; text-align:center;">
+        </div>
+        <div class="col-md-2" style="color: white;">
+        </div>
+    </div>
+    <div class="row">
+            <div class="row" style="margin-top:10%">
+                {% for crypto in crypto_list %}
+                {% if forloop.counter0 == 0 or forloop.counter0 == 5 %}
+                <div class="col-md-2 col-md-offset-1">
+                {% else %}
+                <div class="col-md-2">
+                {% endif %}
+                    <div class="well">
+                        <h2 class="text-muted">{{crypto.name}}</h2>
+                        <p><span class="label label-default">Rank: {{crypto.rank}}</span></p>
+                        <ul>
+                            <li>Ticker: {{crypto.symbol}}</li>
+                            <li>Price: {{crypto.price_usd}}</li>
+                        </ul>          
+                        <p>Market Cap: {{crypto.market_cap_usd}}</p>
+                        <hr>
+                        <h4>Percent Change: {{crypto.percent_change_24h}} %</h4>
+                        <hr>
+                        <!-- <p><a class="btn btn-default btn-lg" href="#"><i class="icon-ok"></i> Select plan</a></p> -->
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    <div class="row">
+            <div class="col-md-4" style="color: white;margin-top:15%;">
+            <a href="{% url 'Profile' %}" style="color: rgb(26, 26, 26);">Profile Select</a>
+            </div>
+            <div class="col-md-5" style="color: white; text-align:center;">
+
+            </div>
+            <div class="col-md-3" style="color: white;margin-top:10%;">
+            </div>
+    </div>
+    <div class="row">
+            <div class="col-md-3" style="color: white;">
+            </div>
+            <div class="col-md-6" style="color: white; text-align:center;margin-top:5%;">
+            </div>
+            <div class="col-md-2 col-md-offset-1" style="text-align:center;color: white;margin-top:5%;">
+            </div>
+        </div>
+</div>
+<script>
+</script>
+
+{% endblock %}>

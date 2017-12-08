@@ -251,6 +251,9 @@ class VoiceCommandView(View):
         elif profile.weather_picking_location:
             print("Weather Search Active: " + data['command'])
             response = WeatherCommandRouter(True, data['command'])
+        elif profile.crypto_search_request:
+            print("Crypto Search Mode Active: ")
+            response = CryptoCommandRouter(True, data['command'])
         else:
             # if "find my iPhone" in data['command']:
             #     response = {'status': 200, 'message': "Your error", 'url':reverse('iPhone')}
@@ -280,6 +283,9 @@ class VoiceCommandView(View):
             if not found:
                 print("Checking Weather")
                 found, response = WeatherCommandRouter(False, data['command'])
+            if not found:
+                print("Checking Crypto")
+                found, response = CryptoCommandRouter(False, data['command'])
             # if not found:
             #     print("Checking Equation")
             #     found, response, request.session['speech_response'], request.session['equation'] = EquationCommandRouter(False, profile, data['command'])

@@ -100,3 +100,17 @@ Current_Weather_Location_Commands_List = [
     "can you look up the current weather",
     "what is the current weather",
     ]
+# *******************************************
+# Crypto Commands
+# *******************************************
+Crypto_List_Commands_List = [
+    "can you show me a list of the top cryptocurrencies",
+    "show me a list of the top cryptocurrencies",
+    "show me the top cryptocurrencies",
+    ]
+Crypto_Search_Commands_List = [
+    "can you look up a cryptocurrency for me",
+    "look up a cryptocurrency for me",
+    "can you search the crypto market for a coin",
+    "search the crypto market for a coin"
+    ]

@@ -28,6 +28,8 @@ class UserProfile(models.Model):
     apple_iphone_dev_count = models.IntegerField(null=True, default=None, blank=True)
     apple_iphone_ping_request = models.BooleanField(default=False)
 
+    crypto_search_request = models.BooleanField(default=False)
+
     #Commute
     loc_1 = models.TextField(null=True, default=None, blank=True)
     loc_2 = models.TextField(null=True, default=None, blank=True)

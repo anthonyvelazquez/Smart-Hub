@@ -9,6 +9,8 @@ from Dashboard.Module_Views.Apple import *
 from Dashboard.Module_Views.LoL import *
 from Dashboard.Module_Views.Weather import *
 from Dashboard.Module_Views.Chatbot import *
+from Dashboard.Module_Views.Uber import *
+from Dashboard.Module_Views.Crypto import *
 from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
@@ -76,6 +78,16 @@ urlpatterns = [
     # Sleep
     # *******************************************
     url(r'^Sleep$', SleepView.as_view(), name='Sleep'),
+    # *******************************************
+    # Uber
+    # *******************************************
+    url(r'^Uber/Estimate$', UberView.as_view(), name='Uber'),
+    # *******************************************
+    # Crypto Currency
+    # *******************************************
+    url(r'^Crypto/List$', CryptoListView.as_view(), name='Crypto_List'),
+    url(r'^Crypto/Request$', CryptoRequestView.as_view(), name='Crypto_Request'),
+    url(r'^Crypto/Display/(?P<coin>[^/]+)$', CryptoDisplayView.as_view(), name='Crypto_Display'),
     # *******************************************
     # Alarm
     # *******************************************

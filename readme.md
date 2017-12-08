@@ -9,11 +9,13 @@ These instructions will get you a copy of the project up and running on your loc
 ### Modules
 
 #### [Alarm Module](alarm-module.md)
+
 #### [Reminder Module](reminder-module.md)
 
 * TODO: Delete Specific Reminders
 
 #### [Sleep Module](sleep-module.md)
+
 #### [Email Module](email-module.md)
 
 * TODO: Allow viewing of individual emails
@@ -33,6 +35,10 @@ These instructions will get you a copy of the project up and running on your loc
 * TODO: Remodel Command Routes to use Chatbot
 
 * TODO: Allow multiple replies
+
+#### [Crypto Module](crypto-module.md)
+
+* TODO: Change appearance
 
 #### [Reddit Module](chatbot-module.md)
 
