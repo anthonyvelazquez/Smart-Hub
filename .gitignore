@@ -1,2 +1,3 @@
 macenv/
 env/
+db.sqlite3

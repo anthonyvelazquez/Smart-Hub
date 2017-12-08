@@ -57,7 +57,7 @@ def SpeechFromXML(speech):
     from sys import platform
     if platform == "linux" or platform == "linux2":
         print("Linux System")
-        folder = base_dir + "\\API\\chatbot\\speech\\"
+        folder = base_dir + "/API/chatbot/speech/"
     elif platform == "darwin":
         print("Mac System")
         folder = base_dir + "/API/chatbot/speech/"
