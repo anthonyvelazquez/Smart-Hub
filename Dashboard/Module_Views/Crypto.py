@@ -63,5 +63,4 @@ class CryptoDisplayView(View):
         return render(request, "crypto/crypto_display.html", context=context)
 
     # https://github.com/mrsmn/coinmarketcap
-    # pip install uber_rides
 

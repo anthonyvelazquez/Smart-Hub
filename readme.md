@@ -40,6 +40,8 @@ These instructions will get you a copy of the project up and running on your loc
 
 * TODO: Change appearance
 
+* Add Quick Search
+
 #### [Reddit Module](chatbot-module.md)
 
 * TODO: Add Reddit Integration

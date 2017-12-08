@@ -255,8 +255,6 @@ class VoiceCommandView(View):
             print("Crypto Search Mode Active: ")
             response = CryptoCommandRouter(True, data['command'])
         else:
-            # if "find my iPhone" in data['command']:
-            #     response = {'status': 200, 'message': "Your error", 'url':reverse('iPhone')}
             print("Checking Navigation")
             found, response, request.session['speech_response'] = NavigationCommandRouter(data['command'])
             if not found:

@@ -265,6 +265,19 @@ def CryptoCommandRouter(active, command):
         if any(command in command_list for command_list in Crypto_List_Commands_List):
             found = True
             response = {'status': 200, 'message': "Your error", 'url':reverse('Crypto_List')}
+        elif any(command in command_list for command_list in Crypto_Search_Commands_List):
+            found = True
+            response = {'status': 200, 'message': "Your error", 'url':reverse('Crypto_Request')}
+        elif any(command in command_list for command_list in Popular_Coin_Commands_List):
+            found = True
+            if "BTC" in command:
+                response = {'status': 200, 'message': "Your error", 'url':reverse('Crypto_Display', kwargs={'coin':"BTC"})}
+            elif "eth" in command:
+                response = {'status': 200, 'message': "Your error", 'url':reverse('Crypto_Display', kwargs={'coin':"ETH"})}
+            elif "LTC" in command:
+                response = {'status': 200, 'message': "Your error", 'url':reverse('Crypto_Display', kwargs={'coin':"LTC"})}
+            else:
+                response = ""
         else:
             response = ""
     return found, response

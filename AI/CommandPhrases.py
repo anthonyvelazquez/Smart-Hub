@@ -109,8 +109,14 @@ Crypto_List_Commands_List = [
     "show me the top cryptocurrencies",
     ]
 Crypto_Search_Commands_List = [
+    "can you look up a coin for me",
     "can you look up a cryptocurrency for me",
     "look up a cryptocurrency for me",
     "can you search the crypto market for a coin",
     "search the crypto market for a coin"
+    ]
+Popular_Coin_Commands_List = [
+    "can you look up BTC",
+    "can you look up eth",
+    "can you look up LTC"
     ]
