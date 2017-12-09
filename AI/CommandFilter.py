@@ -168,14 +168,24 @@ def ReminderCommandRouter(creating, profile, command):
 # *******************************************
 # Email Commands
 # *******************************************
-def EmailCommandRouter(profile, command):
-    found = False
-    if any(command in command_list for command_list in Generic_Email_Unread_Commands_List):
-        found = True
-        response = {'status': 200, 'message': "Your error", 'url':reverse('Email_Unread_List')}
+def EmailCommandRouter(active, unread, profile, command):
+    if active and unread:
+        response = {'status': 200, 'message': "Your error", 'url':reverse('Email_Unread_Specific', kwargs={'number':command})}
+        return response
+    elif active and not unread:
+        response = {'status': 200, 'message': "Your error", 'url':reverse('Email_All_Specific', kwargs={'number':command})}
+        return response
     else:
-        response = ""
-    return found, response
+        found = False
+        if any(command in command_list for command_list in Generic_Email_Unread_Commands_List):
+            found = True
+            response = {'status': 200, 'message': "Your error", 'url':reverse('Email_Unread_List')}
+        elif any(command in command_list for command_list in Generic_Email_All_Commands_List):
+            found = True
+            response = {'status': 200, 'message': "Your error", 'url':reverse('Email_All_List')}
+        else:
+            response = ""
+        return found, response
 # *******************************************
 # Apple Commands
 # *******************************************
@@ -293,6 +303,21 @@ def RedditCommandRouter(active, command):
         if any(command in command_list for command_list in Reddit_Dashboard_Commands_List):
             found = True
             response = {'status': 200, 'message': "Your error", 'url':reverse('Reddit_Dashboard')}
+        else:
+            response = ""
+    return found, response
+# *******************************************
+# Twitter Commands
+# *******************************************
+def TwitterCommandRouter(active, command):
+    if active:
+        response = {'status': 200, 'message': "Your error", 'url':reverse('Current_Weather_Search', kwargs={'location':command})}
+        return response
+    else:
+        found = False
+        if any(command in command_list for command_list in Twitter_Timeline_Commands_List):
+            found = True
+            response = {'status': 200, 'message': "Your error", 'url':reverse('Twitter_Timeline')}
         else:
             response = ""
     return found, response

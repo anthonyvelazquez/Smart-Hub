@@ -12,6 +12,7 @@ from Dashboard.Module_Views.Chatbot import *
 from Dashboard.Module_Views.Uber import *
 from Dashboard.Module_Views.Crypto import *
 from Dashboard.Module_Views.Reddit import *
+from Dashboard.Module_Views.Twitter import *
 from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
@@ -41,6 +42,9 @@ urlpatterns = [
     # Email
     # *******************************************
     url(r'^Email/List/Unread$', EmailUnreadListView.as_view(), name='Email_Unread_List'),
+    url(r'^Email/Display/Unread/(?P<number>[^/]+)$', SpecificEmailUnreadView.as_view(), name='Email_Unread_Specific'),
+    url(r'^Email/List/All$', EmailAllListView.as_view(), name='Email_All_List'),
+    url(r'^Email/Display/All/(?P<number>[^/]+)$', SpecificEmailAllView.as_view(), name='Email_All_Specific'),
     # *******************************************
     # League of Legends
     # *******************************************
@@ -80,13 +84,15 @@ urlpatterns = [
     # *******************************************
     url(r'^Sleep$', SleepView.as_view(), name='Sleep'),
     # *******************************************
-    # Uber
+    # Twitter
     # *******************************************
-    url(r'^Uber/Estimate$', UberView.as_view(), name='Uber'),
+    url(r'^Twitter/Timeline$', TwitterTimelineView.as_view(), name='Twitter_Timeline'),
+    url(r'^Twitter/Request$', TwitterRequestView.as_view(), name='Twitter_Request'),
+    url(r'^Twitter/Tweet$', TwitterTweetView.as_view(), name='Twitter_Tweet'),
     # *******************************************
     # Reddit
     # *******************************************
-    url(r'^Reddit/Dashboard$', RedditDashboardView.as_view(), name='Reddit_Dashbpard'),
+    url(r'^Reddit/Dashboard$', RedditDashboardView.as_view(), name='Reddit_Dashboard'),
     # *******************************************
     # Crypto Currency
     # *******************************************

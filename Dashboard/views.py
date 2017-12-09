@@ -236,6 +236,12 @@ class VoiceCommandView(View):
         elif profile.alarm_active:
             print("Alarm is Currently Going Off: ")
             response = AlarmCommandRouter(True, profile, data['command'])
+        elif profile.unread_email_request:
+            print("Unread Specific Email Number: " + data['command'])
+            response = EmailCommandRouter(True, True, profile, data['command'])
+        elif profile.all_email_request:
+            print("All Specific Email Number: " + data['command'])
+            response = EmailCommandRouter(True, False, profile, data['command'])
         elif profile.apple_iphone_ping_request:
             print("Apple Ping Request Active: ")
             response = AppleCommandRouter(True, profile, data['command'])
@@ -274,7 +280,7 @@ class VoiceCommandView(View):
                 found, response = ReminderCommandRouter(False, profile, data['command'])
             if not found:
                 print("Checking Email")
-                found, response = EmailCommandRouter(profile, data['command'])
+                found, response = EmailCommandRouter(False, False, profile, data['command'])
             if not found:
                 print("Checking Apple")
                 found, response = AppleCommandRouter(False, profile, data['command'])
@@ -287,6 +293,9 @@ class VoiceCommandView(View):
             if not found:
                 print("Checking Reddit")
                 found, response = RedditCommandRouter(False, data['command'])
+            if not found:
+                print("Checking Twitter")
+                found, response = TwitterCommandRouter(False, data['command'])
             # if not found:
             #     print("Checking Equation")
             #     found, response, request.session['speech_response'], request.session['equation'] = EquationCommandRouter(False, profile, data['command'])

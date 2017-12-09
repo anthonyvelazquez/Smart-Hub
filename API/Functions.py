@@ -12,6 +12,7 @@ import email
 from gnewsclient import gnewsclient
 gmaps = googlemaps.Client(key='AIzaSyBrYIZY34HfYPrhUr7pkecChHstvs64nsY')
 from pyicloud import PyiCloudService
+from Dashboard.models import UserProfile, Alarms, Reminders
 from AI.Credentials import *
 def GetProfileWeather(profile, context):
     #https://github.com/csparpa/pyowm
@@ -164,8 +165,8 @@ def GetUnreadEmailsGmail(context):
 def GetUnreadEmaiLListGmail(context):
         # https://codehandbook.org/how-to-read-email-from-gmail-using-python/
         ORG_EMAIL   = "@gmail.com"
-        FROM_EMAIL  = "anthonyhvelazquez" + ORG_EMAIL
-        FROM_PWD    = "velazquez1"
+        FROM_EMAIL  = Gmail_Email + ORG_EMAIL
+        FROM_PWD    = Gmail_Password
         SMTP_SERVER = "imap.gmail.com"
         SMTP_PORT   = 993
         fromlist = []
@@ -200,10 +201,142 @@ def GetUnreadEmaiLListGmail(context):
             print(e)
         context['emaillist'] = zip(fromlist, subjlist)
         print("Unread Emails:" + str(len(id_list)))
-        for a,b in zip(fromlist, subjlist):
-            print("From:" + a)
-            print("Sub:" + b)
+        # print("ID List: " + str(id_list))
+        context['id_list'] = id_list
         context['emails'] = range(0, len(id_list))
+
+def GetAllEmaiLListGmail(context):
+        # https://codehandbook.org/how-to-read-email-from-gmail-using-python/
+        ORG_EMAIL   = "@gmail.com"
+        FROM_EMAIL  = Gmail_Email + ORG_EMAIL
+        FROM_PWD    = Gmail_Password
+        SMTP_SERVER = "imap.gmail.com"
+        SMTP_PORT   = 993
+        fromlist = []
+        subjlist = []
+        try:
+            mail = imaplib.IMAP4_SSL(SMTP_SERVER)
+            mail.login(FROM_EMAIL,FROM_PWD)
+            mail.select('inbox')
+
+            type, data = mail.search(None, 'ALL')
+
+            mail_ids = data[0]
+            id_list = mail_ids.split()   
+            first_email_id = int(id_list[len(id_list) - 20])
+            latest_email_id = int(id_list[-1])
+            new_list = []
+            if(len(id_list) > 0):
+                for i in range(first_email_id, latest_email_id+1):
+                    new_list.append(i)
+                    typ, data = mail.fetch(str(i), '(BODY.PEEK[])' )
+                    for response_part in data:
+                        if isinstance(response_part, tuple):
+                            msg = email.message_from_string(response_part[1].decode('utf-8'))
+                            email_subject = msg['subject']
+                            email_from = res1 = re.sub(r'\<[^)]*\>', '', msg['from']) #Removes everything between < and > which is usually the email address
+                            email_from = msg['from']
+                            fromlist.append(email_from)
+                            subjlist.append(email_subject)
+            else:
+                print("No New Emails")
+        except Exception as e:
+            print(e)
+        context['email_count'] = len(new_list)
+        fromlist.reverse()
+        subjlist.reverse()
+        new_list.reverse()
+        context['emaillist'] = zip(fromlist, subjlist)
+        print("Emails:" + str(len(new_list)))
+        # print("ID List: " + str(id_list))
+        context['id_list'] = new_list
+        context['emails'] = range(0, len(new_list))
+
+def GetUnreadEmailFromID(context, id):
+        # https://codehandbook.org/how-to-read-email-from-gmail-using-python/
+        ORG_EMAIL   = "@gmail.com"
+        FROM_EMAIL  = Gmail_Email + ORG_EMAIL
+        FROM_PWD    = Gmail_Password
+        SMTP_SERVER = "imap.gmail.com"
+        SMTP_PORT   = 993
+        email_from = ""
+        email_subject = ""
+        email_body = ""
+        try:
+            mail = imaplib.IMAP4_SSL(SMTP_SERVER)
+            mail.login(FROM_EMAIL,FROM_PWD)
+            mail.select('inbox')
+
+            type, data = mail.search(None, '(UNSEEN)')
+
+            mail_ids = data[0]
+
+            id_list = mail_ids.split()   
+            print(id_list)
+            context['email_count'] = len(id_list)
+            first_email_id = int(id_list[0])
+            latest_email_id = int(id_list[-1])
+            if(len(id_list) > 0):
+                for i in range(first_email_id, latest_email_id+1):
+                    if str(i) == id:
+                        typ, data = mail.fetch(str(i), '(RFC822)' )
+                        for response_part in data:
+                            if isinstance(response_part, tuple):
+                                msg = email.message_from_string(response_part[1].decode('utf-8'))
+                                count = 0
+                                email_subject = msg['subject']
+                                email_from = msg['from']
+                                email_body = msg.get_payload()
+            else:
+                print("Couldnt Find Email:" + str(id))
+        except Exception as e:
+            print(e)
+        context['from'] = email_from
+        context['subj'] = email_subject
+        context['body'] = email_body
+
+def GetAllEmailFromID(context, id):
+        # https://codehandbook.org/how-to-read-email-from-gmail-using-python/
+        ORG_EMAIL   = "@gmail.com"
+        FROM_EMAIL  = Gmail_Email + ORG_EMAIL
+        FROM_PWD    = Gmail_Password
+        SMTP_SERVER = "imap.gmail.com"
+        SMTP_PORT   = 993
+        email_from = ""
+        email_subject = ""
+        email_body = ""
+        try:
+            mail = imaplib.IMAP4_SSL(SMTP_SERVER)
+            mail.login(FROM_EMAIL,FROM_PWD)
+            mail.select('inbox')
+
+            type, data = mail.search(None, 'All')
+
+            mail_ids = data[0]
+
+            id_list = mail_ids.split()   
+            print(id_list)
+            context['email_count'] = len(id_list)
+            first_email_id = int(id_list[0])
+            latest_email_id = int(id_list[-1])
+            if(len(id_list) > 0):
+                for i in range(first_email_id, latest_email_id+1):
+                    if str(i) == id:
+                        typ, data = mail.fetch(str(i), '(RFC822)' )
+                        for response_part in data:
+                            if isinstance(response_part, tuple):
+                                msg = email.message_from_string(response_part[1].decode('utf-8'))
+                                count = 0
+                                email_subject = msg['subject']
+                                email_from = msg['from']
+                                email_body = msg.get_payload()
+            else:
+                print("Couldnt Find Email:" + str(id))
+        except Exception as e:
+            print(e)
+        context['from'] = email_from
+        context['subj'] = email_subject
+        context['body'] = email_body
 
 def GetDashboardSummarySpeech(profile, context):
     message = "Hello " + profile.first_name + "."

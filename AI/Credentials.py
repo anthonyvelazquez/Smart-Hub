@@ -1,12 +1,12 @@
 global Gmail_Email
-Gmail_Email = "???" # No need for @gmail part
+Gmail_Email = "///" # No need for @gmail part
 global Gmail_Password
-Gmail_Password = "???"
+Gmail_Password = "///"
 
 global iCloud_Email
-iCloud_Email = "???@icloud.com"
+iCloud_Email = "///"
 global iCloud_Password
-iCloud_Password = "???"
+iCloud_Password = "///"
 
 global League_Summoner_Name
 League_Summoner_Name = "Top Raidboss"
@@ -14,6 +14,6 @@ global League_Summoner_Region
 League_Summoner_Region = "na1"
 
 global Reddit_Username
-Reddit_Username = "???"
+Reddit_Username = "///"
 global Reddit_Password
-Reddit_Password = "???"
+Reddit_Password = "///"

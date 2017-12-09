@@ -17,22 +17,27 @@
         </div>
     </div>
     <div class="row">
-        <div class="col-md-2" style="color: white;">
+        <div class="col-md-1" style="color: white;">
         </div>
-        <div class="col-md-8" style="color: white; text-align:center;">
-            <strong>Reddit Dashboard</strong>
-            <hr>
-            <h4 style="text-align:left;">Username: {{username}}</h4>
-            <h4 style="text-align:left;">Inbox: {{ email_count }} unread messages</h4>
-            <hr>
-            <h4 style="text-align:left;">Moderator for:</h4>
-            <ul>
-                {% for mod in mod_list %}
-                <li><h4 style="text-align:left;">{{mod}}</h4></li>
-                {% endfor %}
-            </ul>
+        <div class="col-md-10" style="color: white; text-align:center;">
+            <strong>Email Display</strong>
+            <table class="table table-condensed table-hover">
+              <thead>
+                <tr>
+                  <th class="span1"><strong>From</strong></th>
+                  <th class="span1"><strong>Subject</strong></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td><strong>{{from}}</strong></td>
+                  <td><strong>{{subj}}</strong></td>
+                </tr>
+              </tbody>
+            </table>
+            <h5 style="text-align: left;white-space: pre">{{body}} </h5>           
         </div>
-        <div class="col-md-2" style="color: white;">
+        <div class="col-md-1" style="color: white;">
         </div>
     </div>
     <div class="row">

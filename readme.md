@@ -18,7 +18,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 #### [Email Module](email-module.md)
 
-* TODO: Allow viewing of individual emails
+* TODO: Update the viewing for MIME emails
 
 * TODO: Add email replies
 
@@ -44,11 +44,16 @@ These instructions will get you a copy of the project up and running on your loc
 
 #### [Reddit Module](chatbot-module.md)
 
-* TODO: Add Reddit Integration
+* TODO: Display more in dashboard
+
+* TODO: Display timeline
 
 #### [Twitter Module](twitter-module.md)
 
-* TODO: Add Twitter Integration
+* TODO: Finish Timeline View
+
+* TODO: Add Tweet Sending
+
 
 #### [Spotify Module](chatbot-module.md)
 

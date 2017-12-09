@@ -85,6 +85,12 @@ Generic_Email_Unread_Commands_List = [
     'show me my unread emails',
     'can you show me my unread emails',
     ]
+Generic_Email_All_Commands_List = [
+    'show me my emails',
+    'can you show me my emails',
+    'show me all my emails',
+    'can you show me all my emails',
+    ]
 # *******************************************
 # Apple Commands
 # *******************************************
@@ -130,4 +136,15 @@ Reddit_Dashboard_Commands_List = [
     "load my Reddit dashboard",
     "load my Reddit homepage",
     "Reddit dashboard"
+    ]
+# *******************************************
+# Twitter Commands
+# *******************************************
+Twitter_Timeline_Commands_List = [
+    "open Twitter",
+    "open my Twitter timeline",
+    "open my Twitter homepage",
+    "load my Twitter timeline",
+    "load my Twitter homepage",
+    "Twitter timeline"
     ]

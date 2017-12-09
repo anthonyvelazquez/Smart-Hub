@@ -30,6 +30,9 @@ class UserProfile(models.Model):
 
     crypto_search_request = models.BooleanField(default=False)
 
+    unread_email_request = models.BooleanField(default=False)
+    all_email_request = models.BooleanField(default=False)
+
     #Commute
     loc_1 = models.TextField(null=True, default=None, blank=True)
     loc_2 = models.TextField(null=True, default=None, blank=True)
@@ -55,3 +58,11 @@ class Reminders(models.Model):
     profile = models.ForeignKey(UserProfile, null=True, default=None, blank=True)
     reminder_name = models.TextField(null=True, default=None, blank=True)
     reminder_time = models.DateTimeField(null=True, default=None, blank=True)
+
+class Emails(models.Model):
+    profile = models.ForeignKey(UserProfile, null=True, default=None, blank=True)
+    # What user sees
+    email_number = models.TextField(null=True, default=None, blank=True)
+    # What Gmail needs
+    email_id = models.TextField(null=True, default=None, blank=True)
+    unread = models.BooleanField(default=False)

@@ -21,9 +21,12 @@ class RedditDashboardView(View):
         weather_context = {}
         profile = UserProfile.objects.get(current_profile=True)
         context['current_date'] = datetime.datetime.now()
-        print(reddit.read_only)
-        for submission in reddit.subreddit('gaming').hot(limit=10):
-            print(submission.title)
+        unread_count = 0
+        for item in reddit.inbox.unread(limit=None):
+            unread_count = unread_count + 1
+        context['email_count'] = unread_count
+        context['mod_list'] = reddit.user.moderator_subreddits()
+        context['username'] = reddit.user.me()
         GetProfileWeather(profile, weather_context)
         context.update(weather_context)
         context['speech_response'] = "This is your Reddit Dashboard."

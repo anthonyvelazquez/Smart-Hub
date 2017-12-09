@@ -20,17 +20,26 @@
         <div class="col-md-2" style="color: white;">
         </div>
         <div class="col-md-8" style="color: white; text-align:center;">
-            <strong>Reddit Dashboard</strong>
-            <hr>
-            <h4 style="text-align:left;">Username: {{username}}</h4>
-            <h4 style="text-align:left;">Inbox: {{ email_count }} unread messages</h4>
-            <hr>
-            <h4 style="text-align:left;">Moderator for:</h4>
-            <ul>
-                {% for mod in mod_list %}
-                <li><h4 style="text-align:left;">{{mod}}</h4></li>
-                {% endfor %}
-            </ul>
+                <marquee behavior="scroll" direction="up" scrollamount="2" style="height:500px;">
+                <ul class="timeline" style="list-style-type: none;">
+                    {% for status in status_list %}
+                    <!-- {{status}} -->
+                    <li>
+                            <!-- <i class="glyphicon glyphicon-thumbs-up"></i> -->
+                        <div class="timeline-badge success"><img src="{{status.user.profile_image_url}}"></div>
+                        <div class="timeline-panel">
+                        <div class="timeline-heading">
+                            <h4 class="timeline-title">{{status.user.name}}</h4>
+                            <p><small class="text-muted"><i class="glyphicon glyphicon-time"></i>{{status.created_at}} via Twitter</small></p>
+                        </div>
+                        <div class="timeline-body">
+                            <p>{{status.text}}</p>
+                        </div>
+                        </div>
+                    </li>
+                    {% endfor %}
+                </ul>
+            </marquee>
         </div>
         <div class="col-md-2" style="color: white;">
         </div>
