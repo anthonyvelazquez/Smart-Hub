@@ -354,7 +354,7 @@ def GetDashboardSummarySpeech(profile, context):
         message = message + "so it is a bit cold outside. You might want to wear a jacket or thick sweater."
     else:
         message = message + "so it is normal outside."
-    message = message + "Finally, the sun will set at " + ((profile.sunset).astimezone(tz.tzlocal())).strftime("%I %M %p")
+    message = message + "Finally, the sun will set at " + ((profile.sunset).localize()).strftime("%I %M %p")
     return message
 
 def GetNetworkDevices():

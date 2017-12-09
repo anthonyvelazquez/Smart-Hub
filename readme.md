@@ -18,7 +18,7 @@ These instructions will get you a copy of the project up and running on your loc
 
 #### [Email Module](email-module.md)
 
-* TODO: Update the viewing for MIME emails
+* TODO: Update the viewing for MIME emails(Only some emails work)
 
 * TODO: Add email replies
 
