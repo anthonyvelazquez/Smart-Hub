@@ -14,6 +14,11 @@ gmaps = googlemaps.Client(key='AIzaSyBrYIZY34HfYPrhUr7pkecChHstvs64nsY')
 from pyicloud import PyiCloudService
 from Dashboard.models import UserProfile, Alarms, Reminders
 from AI.Credentials import *
+
+def GetLatLongFromLocation(location):
+    searched_location = gmaps.geocode(location)
+    return float(searched_location[0]['geometry']['location']['lat']), float(searched_location[0]['geometry']['location']['lng'])
+
 def GetProfileWeather(profile, context):
     #https://github.com/csparpa/pyowm
     #print(profile.weather_updated)

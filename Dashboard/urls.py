@@ -84,6 +84,13 @@ urlpatterns = [
     # *******************************************
     url(r'^Sleep$', SleepView.as_view(), name='Sleep'),
     # *******************************************
+    # Uber
+    # *******************************************
+    url(r'^Uber/Request$', UberCarTypeRequestView.as_view(), name='Uber_Request_Car'),
+    url(r'^Uber/Request/Car/(?P<car>[^/]+)$', UberSeatRequestView.as_view(), name='Uber_Request_Seat'),
+    url(r'^Uber/Request/Seat/(?P<seat>[^/]+)$', UberAddressRequestView.as_view(), name='Uber_Request_Address'),
+    url(r'^Uber/Request/Estimate/(?P<address>[^/]+)$', UberEstimateView.as_view(), name='Uber_Estimate'),
+    # *******************************************
     # Twitter
     # *******************************************
     url(r'^Twitter/Timeline$', TwitterTimelineView.as_view(), name='Twitter_Timeline'),

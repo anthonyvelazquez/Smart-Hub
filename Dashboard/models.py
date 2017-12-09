@@ -33,6 +33,10 @@ class UserProfile(models.Model):
     unread_email_request = models.BooleanField(default=False)
     all_email_request = models.BooleanField(default=False)
 
+    uber_car_request = models.BooleanField(default=False)
+    uber_car_seat_request = models.BooleanField(default=False)
+    uber_address_request = models.BooleanField(default=False)
+
     #Commute
     loc_1 = models.TextField(null=True, default=None, blank=True)
     loc_2 = models.TextField(null=True, default=None, blank=True)

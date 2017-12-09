@@ -321,3 +321,27 @@ def TwitterCommandRouter(active, command):
         else:
             response = ""
     return found, response
+# *******************************************
+# Uber Commands
+# *******************************************
+def UberCommandRouter(active, phase, command):
+    if active:
+        if phase == 0:
+            # Remove space for words like uber XL or uber black or uber SUV
+            command = command.replace(" ", "")
+            response = {'status': 200, 'message': "Your error", 'url':reverse('Uber_Request_Seat', kwargs={'car':command})}
+            return response
+        elif phase == 1:
+            response = {'status': 200, 'message': "Your error", 'url':reverse('Uber_Request_Address', kwargs={'seat':command})}
+            return response
+        elif phase == 2:
+            response = {'status': 200, 'message': "Your error", 'url':reverse('Uber_Estimate', kwargs={'address':command})}
+            return response
+    else:
+        found = False
+        if any(command in command_list for command_list in Uber_Estimate_Commands_List):
+            found = True
+            response = {'status': 200, 'message': "Your error", 'url':reverse('Uber_Request_Car')}
+        else:
+            response = ""
+    return found, response

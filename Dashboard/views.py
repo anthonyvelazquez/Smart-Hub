@@ -260,6 +260,15 @@ class VoiceCommandView(View):
         elif profile.crypto_search_request:
             print("Crypto Search Mode Active: ")
             response = CryptoCommandRouter(True, data['command'])
+        elif profile.uber_car_request:
+            print("Uber Car Active: ")
+            response = UberCommandRouter(True, 0, data['command'])
+        elif profile.uber_car_seat_request:
+            print("Uber Car Seat Active: ")
+            response = UberCommandRouter(True, 1, data['command'])
+        elif profile.uber_address_request:
+            print("Uber Address Active: ")
+            response = UberCommandRouter(True, 2, data['command'])
         else:
             print("Checking Navigation")
             found, response, request.session['speech_response'] = NavigationCommandRouter(data['command'])
@@ -296,6 +305,9 @@ class VoiceCommandView(View):
             if not found:
                 print("Checking Twitter")
                 found, response = TwitterCommandRouter(False, data['command'])
+            if not found:
+                print("Checking Uber")
+                found, response = UberCommandRouter(False, 0, data['command'])
             # if not found:
             #     print("Checking Equation")
             #     found, response, request.session['speech_response'], request.session['equation'] = EquationCommandRouter(False, profile, data['command'])

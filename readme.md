@@ -54,6 +54,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 * TODO: Add Tweet Sending
 
+#### [Uber Module](uber-module.md)
+
+* TODO: See if you can request them as well
+
+* TODO: Add exception for trips over 100 miles
 
 #### [Spotify Module](chatbot-module.md)
 

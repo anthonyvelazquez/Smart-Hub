@@ -148,3 +148,15 @@ Twitter_Timeline_Commands_List = [
     "load my Twitter homepage",
     "Twitter timeline"
     ]
+# *******************************************
+# Uber Commands
+# *******************************************
+Uber_Estimate_Commands_List = [
+    "find me an Uber",
+    "show me an Uber estimate",
+    "how much will an Uber be"
+    ]
+global Uber_Car
+Uber_Car = ""
+global Uber_Seats
+Uber_Seats = 1
