@@ -61,3 +61,13 @@ class DeleteLastReminderView(View):
         reminder.delete()
         request.session['speech_response'] = "I deleted your last reminder."
         return redirect('Dashboard')
+
+class CreateSpecificReminderView(View):
+    def get(self, request, reminder):
+        data = reminder.replace("quick reminder ", "")
+        request.session['speech_response'] = "I made a reminder that says " + data
+        profile = UserProfile.objects.get(current_profile=True)
+        reminder = Reminders.objects.create(profile=profile, reminder_name=data)
+        reminder.reminder_time = datetime.datetime.now()
+        reminder.save()
+        return redirect('Dashboard')

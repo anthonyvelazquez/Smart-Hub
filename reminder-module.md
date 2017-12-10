@@ -16,14 +16,6 @@ By saying a specific command in the Command.txt file, the system will delete all
 Person: Delete all reminders
 - AI deletes all reminders and displays dashboard
 ```
-### Specific Delete:
-By saying a specific command in the Command.txt file, the system will delete a specific alarm. It will ask for the name of the alarm you want to delete right after.
-```
-Person: Delete a specific alarm
-- AI asks for alarm name
-Person: School
-- AI deletes alarm and displays dashboard
-```
 ### Delete First:
 By saying a specific command in the Command.txt file, the system will delete the first reminder on the list. 
 ```
@@ -35,4 +27,10 @@ By saying a specific command in the Command.txt file, the system will delete the
 ```
 Person: Delete my last reminder
 - AI deletes last reminder and displays dashboard
+```
+### Quick Creation:
+You can create an reminder by saying "quick reminder" immediately followed by the name. It will then create the reminder and name it
+```
+Person: quick reminder get milk
+- AI creates reminder called "get milk" and displays dashboard
 ```

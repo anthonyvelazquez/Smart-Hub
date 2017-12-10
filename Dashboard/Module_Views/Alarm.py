@@ -64,9 +64,8 @@ class AlarmRequestTimeView(View):
         return redirect('Dashboard')
 
 class CreateSpecificAlarmView(View):
-    def get(self, request):
-        data = request.session['command'].replace("make an alarm for ", "")
-        data = data.replace("set an alarm for ", "")
+    def get(self, request, alarm):
+        data = alarm.replace("quick alarm ", "")
         request.session['speech_response'] = "I made an alarm for " + data
         from dateutil import parser
         dt = parser.parse(data)

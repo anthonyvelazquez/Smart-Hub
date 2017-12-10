@@ -77,12 +77,10 @@ def AlarmCommandRouter(active, profile, command):
                 found = True
                 print("Deleting All Alarms")
                 response = {'status': 200, 'message': "Your error", 'url':reverse('Alarm_Delete_All')}
-            # TODO: Find Global Method to set the alarm
-            # elif "make an alarm for" in command or "set an alarm for" in command:
-            #     found = True
-            #     command_alarm = command
-            #     response = {'status': 200, 'message': "Your error", 'url':reverse('Alarm_Create')}
-            # Asking to create an alarm
+            elif "quick alarm" in command :
+                found = True
+                command_alarm = command
+                response = {'status': 200, 'message': "Your error", 'url':reverse('Alarm_Create_Specific', kwargs={'alarm':command})}
             elif any(command in command_list for command_list in Generic_Alarm_Request_Commands_List):
                 found = True
                 print("Creating Alarm")
@@ -156,6 +154,9 @@ def ReminderCommandRouter(creating, profile, command):
         elif any(command in command_list for command_list in Generic_Reminder_Delete_Commands_List):
             found = True
             response = {'status': 200, 'message': "Your error", 'url':reverse('Reminder_Delete_All')}
+        elif "quick reminder" in command :
+            found = True
+            response = {'status': 200, 'message': "Your error", 'url':reverse('Reminder_Create_Specific', kwargs={'reminder':command})}
         elif "delete my first reminder" in command or "delete the first reminder" in command:
             found = True
             response = {'status': 200, 'message': "Your error", 'url':reverse('Reminder_Delete_First')}

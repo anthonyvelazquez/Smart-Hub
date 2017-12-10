@@ -14,9 +14,9 @@ Person: 7am
 - AI creates alarm based on info then displays dashboard
 ```
 ### Quick Creation:
-You can create an alarm by saying one of the commands in the Command.txt file immediately followed by a time. It will then create the alarm and set a default "Alarm" name to it
+You can create an alarm by saying "quick alarm" immediately followed by a time. It will then create the alarm and set a default "Alarm" name to it
 ```
-Person: Set an alarm for 5pm
+Person: quick alarm 5pm
 - AI creates 5pm alarm labeled 'Alarm' then displays dashboard
 ```
 ### Alarm Trigger:
@@ -32,7 +32,6 @@ By saying a specific command in the Command.txt file, the system will delete all
 Person: Delete all alarms
 - AI deletes all alarms and displays dashboard
 ```
-
 ### Specific Delete:
 By saying a specific command in the Command.txt file, the system will delete a specific alarm. It will ask for the name of the alarm you want to delete right after.
 ```

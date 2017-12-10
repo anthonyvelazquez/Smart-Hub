@@ -33,7 +33,7 @@ urlpatterns = [
     url(r'^Alarm/Request$', AlarmRequestView.as_view(), name='Alarm_Request'),
     url(r'^Alarm/Request/Name/(?P<pk>[^/]+)/(?P<name>[^/]+)$', AlarmRequestNameView.as_view(), name='Alarm_Request_Set_Name'),
     url(r'^Alarm/Request/Time/(?P<pk>[^/]+)/(?P<time>[^/]+)$', AlarmRequestTimeView.as_view(), name='Alarm_Request_Set_Time'),
-    url(r'^Alarm/Request/Specific$', CreateSpecificAlarmView.as_view(), name='Alarm_Create_Specific'),
+    url(r'^Alarm/Request/Specific/(?P<alarm>[^/]+)$', CreateSpecificAlarmView.as_view(), name='Alarm_Create_Specific'),
     url(r'^Alarm/Disable$', DisableAlarmView.as_view(), name='Alarm_Disable'),
     url(r'^Alarm/Delete/All$', DeleteAllAlarmView.as_view(), name='Alarm_Delete_All'),
     url(r'^Alarm/Delete/Request$', DeleteAlarmRequestView.as_view(), name='Alarm_Delete_Request_Name'),
@@ -76,6 +76,7 @@ urlpatterns = [
     url(r'^Reminder/Delete/All$', DeleteAllReminderView.as_view(), name='Reminder_Delete_All'),
     url(r'^Reminder/Delete/First$', DeleteFirstReminderView.as_view(), name='Reminder_Delete_First'),
     url(r'^Reminder/Delete/Last$', DeleteLastReminderView.as_view(), name='Reminder_Delete_Last'),
+    url(r'^Reminder/Request/Specific/(?P<reminder>[^/]+)$', CreateSpecificReminderView.as_view(), name='Reminder_Create_Specific'),
     # *******************************************
     # Alarm
     # *******************************************

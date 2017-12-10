@@ -11,7 +11,7 @@ class SystemVolumeUpView(View):
         profile = UserProfile.objects.get(current_profile=True)
         context['speech_response'] = "Volume Increased"
         context['ai_voice'] = profile.ai_voice
-        call(["amixer", "sset", "'Master'", "100%"])        
+        call(["amixer", "sset", "'Master'", "10%+"])        
         return render(request, "mirror.html", context=context)
 
 class SystemVolumeDownView(View):
@@ -20,5 +20,7 @@ class SystemVolumeDownView(View):
         profile = UserProfile.objects.get(current_profile=True)
         context['speech_response'] = "Volume Decreased"
         context['ai_voice'] = profile.ai_voice
-        call(["amixer", "sset", "'Master'", "0%"])
+        call(["amixer", "sset", "'Master'", "10%-"])
         return render(request, "mirror.html", context=context)
+
+        # https://askubuntu.com/questions/689521/control-volume-using-python-script
