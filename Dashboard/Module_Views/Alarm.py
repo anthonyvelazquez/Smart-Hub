@@ -97,8 +97,7 @@ class DisableAlarmView(View):
         request.session['speech_response'] = "I turned off your alarm"
         profile = UserProfile.objects.get(current_profile=True)
         profile.alarm_active = False
-        profile.alarm_creating_name = False
-        profile.alarm_creating_time = False
+        profile.sleep_active = False
         profile.save()
         alarm = Alarms.objects.get(profile=profile, enabled=True)
         alarm.enabled = False

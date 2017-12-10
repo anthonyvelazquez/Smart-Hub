@@ -230,7 +230,7 @@ class VoiceCommandView(View):
         elif profile.ai_setting_gender:
             print("AI Setup Active: Gender")
             response, request.session['ai_info'] = AISetupCommandRouter(True, 2, profile, data['command'])
-        elif profile.sleep_active:
+        elif profile.sleep_active and not profile.alarm_active:
             print("Sleep Mode Active: ")
             response, request.session['speech_response'] = SleepCommandRouter(True, profile, data['command'])
         elif profile.alarm_active:

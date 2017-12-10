@@ -10,6 +10,7 @@ class SleepView(View):
         profile = UserProfile.objects.get(current_profile=True)
         profile.sleep_active = True
         profile.save()
+        context['alarmlist'] = Alarms.objects.filter(profile=profile)
         context['speech_response'] = "Sleep Mode Activated"
         context['ai_voice'] = profile.ai_voice
         return render(request, "sleep.html", context=context)
