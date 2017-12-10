@@ -67,7 +67,16 @@ Generic_Sleep_Disable_Commands_List = [
     'hello',
     'good morning',
     'good afternoon',
-    'wake up,'
+    ' good morning',
+    ' good afternoon',
+    'wake up',
+    ' wake up',
+    ' hello',
+    ' hey',
+    ' mirror mode',
+    ' dashboard',
+    'mirror mode',
+    'dashboard',
     ]
 # *******************************************
 # Setup Commands
