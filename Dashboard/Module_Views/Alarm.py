@@ -88,6 +88,8 @@ class DisplayAlarmView(View):
         context['alarm'] = alarm
         GetProfileWeather(profile, weather_context)
         context.update(weather_context)
+        context['speech_response'] = "Your alarm called " + alarm.alarm_name + "is going off."
+        context['ai_voice'] = profile.ai_voice
         return render(request, "alarm.html", context=context)
 
 class DisableAlarmView(View):
