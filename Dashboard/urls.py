@@ -13,6 +13,7 @@ from Dashboard.Module_Views.Uber import *
 from Dashboard.Module_Views.Crypto import *
 from Dashboard.Module_Views.Reddit import *
 from Dashboard.Module_Views.Twitter import *
+from Dashboard.Module_Views.System import *
 from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
@@ -83,6 +84,11 @@ urlpatterns = [
     # Sleep
     # *******************************************
     url(r'^Sleep$', SleepView.as_view(), name='Sleep'),
+    # *******************************************
+    # System
+    # *******************************************
+    url(r'^System/Volume/Up$', SystemVolumeUpView.as_view(), name='System_Volume_Up'),
+    url(r'^System/Volume/Down$', SystemVolumeDownView.as_view(), name='System_Volume_Down'),
     # *******************************************
     # Uber
     # *******************************************

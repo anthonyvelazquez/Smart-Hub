@@ -14,6 +14,7 @@ class UserProfile(models.Model):
     ai_gender = models.TextField(null=True, default=None, blank=True)
     ai_setting_name = models.BooleanField(default=False)
     ai_setting_gender = models.BooleanField(default=False)
+    ai_setting_volume = models.TextField(null=True, default=None, blank=True)
 
     alarm_active = models.BooleanField(default=False)
     alarm_creating_name = models.BooleanField(default=False)

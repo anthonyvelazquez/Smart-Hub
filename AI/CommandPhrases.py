@@ -161,3 +161,12 @@ global Uber_Car
 Uber_Car = ""
 global Uber_Seats
 Uber_Seats = 1
+# *******************************************
+# System Commands
+# *******************************************
+System_Volume_Up_Commands_List = [
+    "volume up",
+    ]
+System_Volume_Down_Commands_List = [
+    "volume down",
+    ]

@@ -273,6 +273,9 @@ class VoiceCommandView(View):
             print("Checking Navigation")
             found, response, request.session['speech_response'] = NavigationCommandRouter(data['command'])
             if not found:
+                print("Checking System")
+                found, response = SystemCommandRouter(False, data['command'])
+            if not found:
                 print("Checking Setup")
                 found, response = AISetupCommandRouter(False, 1, profile, data['command'])
             if not found:
