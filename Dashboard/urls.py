@@ -33,6 +33,7 @@ urlpatterns = [
     url(r'^Alarm/Request$', AlarmRequestView.as_view(), name='Alarm_Request'),
     url(r'^Alarm/Request/Name/(?P<pk>[^/]+)/(?P<name>[^/]+)$', AlarmRequestNameView.as_view(), name='Alarm_Request_Set_Name'),
     url(r'^Alarm/Request/Time/(?P<pk>[^/]+)/(?P<time>[^/]+)$', AlarmRequestTimeView.as_view(), name='Alarm_Request_Set_Time'),
+    url(r'^Alarm/Request/Mode/(?P<pk>[^/]+)/(?P<mode>[^/]+)$', AlarmRequestModeView.as_view(), name='Alarm_Request_Set_Mode'),
     url(r'^Alarm/Request/Specific/(?P<alarm>[^/]+)$', CreateSpecificAlarmView.as_view(), name='Alarm_Create_Specific'),
     url(r'^Alarm/Disable$', DisableAlarmView.as_view(), name='Alarm_Disable'),
     url(r'^Alarm/Delete/All$', DeleteAllAlarmView.as_view(), name='Alarm_Delete_All'),

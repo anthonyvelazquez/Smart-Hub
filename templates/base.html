@@ -58,9 +58,13 @@
     };
     $(window).bind("load", function() {
         var now = new Date();
-        if(now.getHours() > 12)
+        console.log(now.getHours())
+        if(now.getHours() >= 12)
         {
-            var time = now.getHours()-12 + ":";
+            if(now.getHours() > 12)
+                {var time = now.getHours()-12 + ":";}
+            else
+                {var time = now.getHours() + ":";}
             if(now.getMinutes() > 9)
             {
                 time = time + now.getMinutes();
@@ -95,9 +99,12 @@
     });
     function UpdateTime() {
         var now = new Date();
-        if(now.getHours() > 12)
+        if(now.getHours() >= 12)
         {
-            var time = now.getHours()-12 + ":";
+            if(now.getHours() > 12)
+                {var time = now.getHours()-12 + ":";}
+            else
+                {var time = now.getHours() + ":";}
             if(now.getMinutes() > 9)
             {
                 time = time + now.getMinutes();
@@ -129,7 +136,7 @@
         var current_date = new Date()
         var selected_date = new Date("{{ alarm.alarm_time.isoformat }}")
         var enabled = '{{alarm.enabled}}'
-        if(selected_date.getHours() == current_date.getHours() && selected_date.getMinutes() == current_date.getMinutes() && enabled == "True")
+        if(selected_date.getDay() == current_date.getDay() && selected_date.getHours() == current_date.getHours() && selected_date.getMinutes() == current_date.getMinutes() && enabled == "True")
         {
             var url =  'http://127.0.0.1:8000/Alarm/Display/' + '{{alarm.pk}}'
             window.location.href = url

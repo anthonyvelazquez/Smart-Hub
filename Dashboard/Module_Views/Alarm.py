@@ -49,9 +49,12 @@ class AlarmRequestNameView(View):
 
 class AlarmRequestTimeView(View):
     def get(self, request, pk, time):
+        context = {}
+        weather_context = {}
         profile = UserProfile.objects.get(current_profile=True)
         # Set the profile so the command router finishes and doesnt loop
         profile.alarm_creating_time = False
+        profile.alarm_creating_mode = True
         profile.save()
         # Grab the alarm from the PK we saved and then set the time
         alarm = Alarms.objects.get(pk=pk)
@@ -60,7 +63,30 @@ class AlarmRequestTimeView(View):
         alarm.alarm_time = datetime.datetime.now()
         alarm.alarm_time = alarm.alarm_time.replace(hour=dt.hour, minute=dt.minute)
         alarm.save()
-        request.session['speech_response'] = "I set your alarm."
+        context['current_date'] = datetime.datetime.now()
+        GetProfileWeather(profile, weather_context)
+        context.update(weather_context)
+        context['speech_response'] = "When do you want the alarm for?"
+        context['ai_voice'] = profile.ai_voice
+        return render(request, "alarm/alarm_request.html", context=context)
+
+class AlarmRequestModeView(View):
+    def get(self, request, pk, mode):
+        profile = UserProfile.objects.get(current_profile=True)
+        # Set the profile so the command router finishes and doesnt loop
+        profile.alarm_creating_mode = False
+        profile.save()
+        # Grab the alarm from the PK we saved and then set the time
+        alarm = Alarms.objects.get(pk=pk)
+        if "daily" in mode:
+            alarm.daily = True
+        elif "weekly" in mode:
+            alarm.weekly = True
+        elif "tomorrow" in mode:
+            now = datetime.datetime.now()
+            alarm.alarm_time = alarm.alarm_time.replace(day=now + 1)
+        alarm.save()
+        request.session['speech_response'] = "I set your " + mode + " alarm."
         return redirect('Dashboard')
 
 class CreateSpecificAlarmView(View):
@@ -85,6 +111,8 @@ class DisplayAlarmView(View):
         profile.save()
         context['current_date'] = datetime.datetime.now()
         alarm = Alarms.objects.get(pk=pk)
+        alarm.going_off = True
+        alarm.save()
         context['alarm'] = alarm
         GetProfileWeather(profile, weather_context)
         context.update(weather_context)
@@ -96,13 +124,23 @@ class DisableAlarmView(View):
     def get(self, request):
         context = {}
         weather_context = {}
-        request.session['speech_response'] = "I turned off your alarm"
         profile = UserProfile.objects.get(current_profile=True)
         profile.alarm_active = False
         profile.sleep_active = False
         profile.save()
-        alarm = Alarms.objects.get(profile=profile, enabled=True)
-        alarm.enabled = False
+        alarm = Alarms.objects.get(profile=profile, going_off=True)
+        alarm.going_off = False
+        if alarm.daily:
+            now = datetime.datetime.now()
+            alarm.alarm_time = alarm.alarm_time + datetime.timedelta(days=1)
+            request.session['speech_response'] = "I reset your daily alarm"
+        elif alarm.weekly:
+            now = datetime.datetime.now()
+            alarm.alarm_time = alarm.alarm_time + datetime.timedelta(weeks=1)
+            request.session['speech_response'] = "I reset your weekly alarm"
+        else:
+            request.session['speech_response'] = "I turned off your alarm"
+            alarm.enabled = False
         alarm.save()
         return redirect('Dashboard')
 

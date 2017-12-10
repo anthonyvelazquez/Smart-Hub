@@ -60,6 +60,11 @@ def AlarmCommandRouter(active, profile, command):
             print("Setting Alarm Time: " + command)
             response = {'status': 200, 'message': "Your error", 'url':reverse('Alarm_Request_Set_Time', kwargs={'pk':AI.CommandPhrases.Alarm_PK, 'time':command})}
             return found, response
+        elif profile.alarm_creating_mode:
+            found = True
+            print("Setting Alarm Mode: " + command)
+            response = {'status': 200, 'message': "Your error", 'url':reverse('Alarm_Request_Set_Mode', kwargs={'pk':AI.CommandPhrases.Alarm_PK, 'mode':command})}
+            return found, response
         # Deleting Specific Alarm
         elif profile.alarm_deleting_specific:
             found = True

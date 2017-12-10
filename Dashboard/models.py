@@ -19,6 +19,7 @@ class UserProfile(models.Model):
     alarm_active = models.BooleanField(default=False)
     alarm_creating_name = models.BooleanField(default=False)
     alarm_creating_time = models.BooleanField(default=False)
+    alarm_creating_mode = models.BooleanField(default=False)
     alarm_deleting_specific = models.BooleanField(default=False)
     
     reminder_create_active = models.BooleanField(default=False)
@@ -58,6 +59,9 @@ class Alarms(models.Model):
     alarm_name = models.TextField(null=True, default=None, blank=True)
     alarm_time = models.DateTimeField(null=True, default=None, blank=True)
     enabled = models.BooleanField(default=False)
+    going_off = models.BooleanField(default=False)
+    daily = models.BooleanField(default=False)
+    weekly = models.BooleanField(default=False)
 
 class Reminders(models.Model):
     profile = models.ForeignKey(UserProfile, null=True, default=None, blank=True)
