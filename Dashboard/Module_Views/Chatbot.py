@@ -160,10 +160,7 @@ class ChatbotView(View):
         return render(request, "mirror.html", context=context)
 
 # http://docs.python-guide.org/en/latest/scenarios/xml/
-# xmltodict
 # https://pyspotify.mopidy.com/en/latest/
-# http://praw.readthedocs.io/en/latest/code_overview/reddit_instance.html
-# https://code.google.com/archive/p/python-twitter/
 # https://github.com/goldsmith/Wikipedia
 # https://pypi.python.org/pypi/youtube-api-wrapper/0.2
 # https://github.com/unwitting/bitstampy

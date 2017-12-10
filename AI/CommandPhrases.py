@@ -89,6 +89,7 @@ Generic_Email_All_Commands_List = [
     'show me my emails',
     'can you show me my emails',
     'show me all my emails',
+    'show all my emails',
     'can you show me all my emails',
     ]
 # *******************************************
