@@ -251,11 +251,11 @@ class VoiceCommandView(View):
         elif profile.search_active:
             print("Search is Active: " + data['command'])
             response, request.session['speech_response'], request.session['search'] = SearchCommandRouter(True, profile, data['command'])
-        elif profile.reminder_create_active:
-            print("Reminder is Active: " + data['command'])
+        elif profile.reminder_creating_name:
+            print("Reminder Setting Name: " + data['command'])
             response = ReminderCommandRouter(True, False, profile, data['command'])
         elif profile.reminder_time_create_active:
-            print("Reminder Time is Active: " + data['command'])
+            print("Reminder Setting Time: " + data['command'])
             response = ReminderCommandRouter(True, True, profile, data['command'])
         elif profile.math_request_active:
             print("Math is Active: " + data['command'])

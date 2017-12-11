@@ -16,13 +16,14 @@ class UserProfile(models.Model):
     ai_setting_gender = models.BooleanField(default=False)
     ai_setting_volume = models.TextField(null=True, default=None, blank=True)
 
+
     alarm_active = models.BooleanField(default=False)
     alarm_creating_name = models.BooleanField(default=False)
     alarm_creating_time = models.BooleanField(default=False)
     alarm_creating_mode = models.BooleanField(default=False)
     alarm_deleting_specific = models.BooleanField(default=False)
     
-    reminder_create_active = models.BooleanField(default=False)
+    reminder_creating_name = models.BooleanField(default=False)
     reminder_time_create_active = models.BooleanField(default=False)
     
     math_request_active = models.BooleanField(default=False)
