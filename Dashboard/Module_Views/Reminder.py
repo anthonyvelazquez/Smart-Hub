@@ -56,6 +56,19 @@ class ReminderView(View):
         reminder.save()
         return redirect('Dashboard')
 
+class CreateQuickReminderView(View):
+    def get(self, request, reminder):
+        data = reminder.replace("quick reminder ", "")
+        request.session['speech_response'] = "I created your reminder."
+        from dateutil import parser
+        dt = parser.parse(data)
+        profile = UserProfile.objects.get(current_profile=True)
+        reminder = Reminders.objects.create(profile=profile, reminder_name=reminder, enabled=True)
+        reminder.reminder_time = datetime.datetime.now()
+        reminder.reminder_time = reminder.reminder_time + datetime.timedelta(days=1)
+        reminder.save()
+        return redirect('Dashboard')
+
 class DeleteAllReminderView(View):
     def get(self, request):
         profile = UserProfile.objects.get(current_profile=True)
@@ -82,10 +95,26 @@ class DeleteLastReminderView(View):
 
 class CreateSpecificReminderView(View):
     def get(self, request, reminder):
-        data = reminder.replace("quick reminder ", "")
+        data = reminder.replace("remind me to ", "")
         request.session['speech_response'] = "I made a reminder that says " + data
         profile = UserProfile.objects.get(current_profile=True)
         reminder = Reminders.objects.create(profile=profile, reminder_name=data)
         reminder.reminder_time = datetime.datetime.now()
         reminder.save()
         return redirect('Dashboard')
+
+class DisplayReminderView(View):
+    def get(self, request, pk):
+        context = {}
+        weather_context = {}
+        profile = UserProfile.objects.get(current_profile=True)
+        profile.save()
+        context['current_date'] = datetime.datetime.now()
+        reminder = Reminders.objects.get(pk=pk)
+        reminder.delete()
+        context['reminder'] = reminder
+        GetProfileWeather(profile, weather_context)
+        context.update(weather_context)
+        context['speech_response'] = "This is your reminder."
+        context['ai_voice'] = profile.ai_voice
+        return render(request, "reminder/reminder_display.html", context=context)

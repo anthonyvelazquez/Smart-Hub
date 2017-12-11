@@ -3,13 +3,18 @@
 # *******************************************
 Generic_Alarm_Request_Commands_List = [
     'can you create an alarm',
-    'can you set an alarm',
     'create an alarm',
-    'set an alarm',
     'can you create an alarm for me',
-    'can you set an alarm for me',
     'create an alarm for me',
-    'set an alarm for me'
+    ]
+Set_Alarm_Request_Commands_List = [
+    'set an alarm in ',
+    'set an alarm for ',
+    'set a repeating alarm for '
+    'wake me up at '
+    ]
+Quick_Alarm_Request_Commands_List = [
+    'quick alarm ',
     ]
 Generic_Alarm_Delete_Commands_List = [
     'delete all alarms',
@@ -36,13 +41,14 @@ Alarm_PK = ""
 # Reminder Commands
 # *******************************************
 Generic_Reminder_Request_Commands_List = [
-    'can you create a reminder',
     'create a reminder',
     'set a reminder',
-    'can you create a reminder for me',
-    'can you set a reminder for me',
-    'create a reminder for me',
-    'set a reminder for me'
+    ]
+Quick_Reminder_Request_Commands_List = [
+    'quick reminder',
+    ]
+Reminder_Me_Request_Commands_List = [
+    'remind me to ',
     ]
 Generic_Reminder_Delete_Commands_List = [
     'delete all reminders',

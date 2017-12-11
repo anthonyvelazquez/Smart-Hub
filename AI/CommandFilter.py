@@ -82,9 +82,11 @@ def AlarmCommandRouter(active, profile, command):
                 found = True
                 print("Deleting All Alarms")
                 response = {'status': 200, 'message': "Your error", 'url':reverse('Alarm_Delete_All')}
-            elif "quick alarm" in command :
+            elif any(command in command_list for command_list in Quick_Alarm_Request_Commands_List):
                 found = True
-                command_alarm = command
+                response = {'status': 200, 'message': "Your error", 'url':reverse('Alarm_Create_Quick', kwargs={'alarm':command})}
+            elif any(command in command_list for command_list in Set_Alarm_Request_Commands_List):
+                found = True
                 response = {'status': 200, 'message': "Your error", 'url':reverse('Alarm_Create_Specific', kwargs={'alarm':command})}
             elif any(command in command_list for command_list in Generic_Alarm_Request_Commands_List):
                 found = True
@@ -162,9 +164,12 @@ def ReminderCommandRouter(creating, time, profile, command):
         elif any(command in command_list for command_list in Generic_Reminder_Delete_Commands_List):
             found = True
             response = {'status': 200, 'message': "Your error", 'url':reverse('Reminder_Delete_All')}
-        elif "quick reminder" in command :
+        elif any(command in command_list for command_list in Reminder_Me_Request_Commands_List):
             found = True
             response = {'status': 200, 'message': "Your error", 'url':reverse('Reminder_Create_Specific', kwargs={'reminder':command})}
+        elif any(command in command_list for command_list in Quick_Reminder_Request_Commands_List):
+            found = True
+            response = {'status': 200, 'message': "Your error", 'url':reverse('Reminder_Create_Quick', kwargs={'reminder':command})}
         elif "delete my first reminder" in command or "delete the first reminder" in command:
             found = True
             response = {'status': 200, 'message': "Your error", 'url':reverse('Reminder_Delete_First')}

@@ -8,13 +8,17 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Modules
 
-#### [Alarm Module](alarm-module.md)
+#### [Alarm Module]
 
-#### [Reminder Module](reminder-module.md)
+* TODO: Testing and Error Checks
 
-* TODO: Delete Specific Reminders
+#### [Reminder Module]
 
-#### [Sleep Module](sleep-module.md)
+* TODO: Testing and Error Checks
+
+#### [Sleep Module]
+
+* TODO: Test that alarms and reminders display
 
 #### [Email Module](email-module.md)
 

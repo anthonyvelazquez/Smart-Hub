@@ -83,13 +83,12 @@ class AlarmRequestModeView(View):
         elif "weekly" in mode:
             alarm.weekly = True
         elif "tomorrow" in mode:
-            now = datetime.datetime.now()
-            alarm.alarm_time = alarm.alarm_time.replace(day=now + 1)
+            alarm.alarm_time = alarm.alarm_time + datetime.timedelta(days=1)
         alarm.save()
         request.session['speech_response'] = "I set your " + mode + " alarm."
         return redirect('Dashboard')
 
-class CreateSpecificAlarmView(View):
+class CreateQuickAlarmView(View):
     def get(self, request, alarm):
         data = alarm.replace("quick alarm ", "")
         request.session['speech_response'] = "I made an alarm for " + data
@@ -98,6 +97,44 @@ class CreateSpecificAlarmView(View):
         profile = UserProfile.objects.get(current_profile=True)
         alarm = Alarms.objects.create(profile=profile, alarm_name="Alarm", enabled=True)
         alarm.alarm_time = datetime.datetime.now()
+        # The current hour is older than the hour they want
+        if alarm.alarm_time.hour > dt.hour:
+            alarm.alarm_time = alarm.alarm_time + datetime.timedelta(days=1)
+        # Same hour but its later than the alarm time
+        elif alarm.alarm_time.hour == dt.hour and alarm.alarm_time.minute > dt.minute:
+            alarm.alarm_time = alarm.alarm_time + datetime.timedelta(days=1)
+        alarm.alarm_time = alarm.alarm_time.replace(hour=dt.hour, minute=dt.minute)
+        alarm.save()
+        return redirect('Dashboard')
+
+class CreateSpecificAlarmView(View):
+    def get(self, request, alarm):
+        data = alarm.replace("set an alarm in ", "")
+        data1 = alarm.replace("set an alarm for ", "")
+        data2 = alarm.replace("set a repeating alarm for ", "")
+        data2 = alarm.replace("wake me up at ", "")
+        from dateutil import parser
+        profile = UserProfile.objects.get(current_profile=True)
+        alarm = Alarms.objects.create(profile=profile, alarm_name="Alarm", enabled=True)
+        alarm.alarm_time = datetime.datetime.now()
+        if data:
+            dt = parser.parse(data)
+            request.session['speech_response'] = "I made an alarm for " + data
+        elif data1:
+            dt = parser.parse(data1)
+            request.session['speech_response'] = "I made an alarm for " + data1
+        elif data2:
+            dt = parser.parse(data2)
+            alarm.daily = True
+            request.session['speech_response'] = "I made a repeating alarm for " + data2
+        elif data3:
+            dt = parser.parse(data3)
+            request.session['speech_response'] = "I will wake you up at " + data3
+        # Check if alarm should be today or tomorrow
+        if alarm.alarm_time.hour < dt.hour:
+            alarm.alarm_time = alarm.alarm_time + datetime.timedelta(days=1)
+        elif alarm.alarm_time.hour == dt.hour and alarm.alarm_time.minute < dt.minute:
+            alarm.alarm_time = alarm.alarm_time + datetime.timedelta(days=1)
         alarm.alarm_time = alarm.alarm_time.replace(hour=dt.hour, minute=dt.minute)
         alarm.save()
         return redirect('Dashboard')

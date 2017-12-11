@@ -86,7 +86,7 @@
             {
                 time = time + "0" + now.getMinutes();
             }
-            time = time + " PM";
+            time = time + " AM";
         }
         $("#time").text(time)
         {% if ai_voice %}
@@ -136,6 +136,8 @@
         var current_date = new Date()
         var selected_date = new Date("{{ alarm.alarm_time.isoformat }}")
         var enabled = '{{alarm.enabled}}'
+        console.log(current_date)
+        console.log(selected_date)
         if(selected_date.getDay() == current_date.getDay() && selected_date.getHours() == current_date.getHours() && selected_date.getMinutes() == current_date.getMinutes() && enabled == "True")
         {
             var url =  'http://127.0.0.1:8000/Alarm/Display/' + '{{alarm.pk}}'
@@ -143,9 +145,25 @@
         }
         {% endfor %}
     }
+    //Reminder Checks
+    function ReminderSystem() {
+        {% for reminder in reminderlist %}
+        var current_date = new Date()
+        var selected_date = new Date("{{ reminder.reminder_time.isoformat }}")
+        var enabled = '{{reminder.enabled}}'
+        console.log(current_date)
+        console.log(selected_date)
+        if(selected_date.getDay() == current_date.getDay() && selected_date.getHours() == current_date.getHours() && selected_date.getMinutes() == current_date.getMinutes() && enabled == "True")
+        {
+            var url =  'http://127.0.0.1:8000/Reminder/Display/' + '{{reminder.pk}}'
+            window.location.href = url
+        }
+        {% endfor %}
+    }
 
     window.setInterval(function(){
         AlarmSystem();
+        ReminderSystem();
     }, 5000);
     window.setInterval(function(){
         UpdateTime();
