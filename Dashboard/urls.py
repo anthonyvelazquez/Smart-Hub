@@ -14,6 +14,7 @@ from Dashboard.Module_Views.Crypto import *
 from Dashboard.Module_Views.Reddit import *
 from Dashboard.Module_Views.Twitter import *
 from Dashboard.Module_Views.System import *
+from Dashboard.Module_Views.Dictionary import *
 from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
@@ -124,6 +125,10 @@ urlpatterns = [
     url(r'^Search/Request$', views.SearchRequestView.as_view(), name='Search_Request'),
     url(r'^Search/Result$', views.SearchResultView.as_view(), name='Search_Result'),
     url(r'^Chatbot/(?P<speech>[^/]+)$', ChatbotView.as_view(), name='Chatbot'),
+    # *******************************************
+    # Dictionary
+    # *******************************************
+    url(r'^Dictionary/Definition/(?P<word>[^/]+)$', DefinitionView.as_view(), name='Dictionary_Definition'),
 ]
 
 # https://docs.smart-mirror.io/docs/configure_the_mirror.html#giphy

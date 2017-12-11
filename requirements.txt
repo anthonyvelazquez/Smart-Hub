@@ -12,3 +12,4 @@ praw
 python-twitter
 coinmarketcap
 xmltodict
+PyDictionary

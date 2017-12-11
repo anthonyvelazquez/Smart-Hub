@@ -377,3 +377,18 @@ def SystemCommandRouter(active, command):
         else:
             response = ""
     return found, response
+# *******************************************
+# Dictionary Commands
+# *******************************************
+def DictionaryCommandRouter(active, command):
+    if active:
+        response = {'status': 200, 'message': "Your error", 'url':reverse('Current_Weather_Search', kwargs={'location':command})}
+        return response
+    else:
+        found = False
+        if any(command in command_list for command_list in Dictionary_Definition_Commands_List):
+            found = True
+            response = {'status': 200, 'message': "Your error", 'url':reverse('Dictionary_Definition')}
+        else:
+            response = ""
+    return found, response

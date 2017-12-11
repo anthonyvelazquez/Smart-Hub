@@ -178,3 +178,11 @@ System_Volume_Up_Commands_List = [
 System_Volume_Down_Commands_List = [
     "volume down",
     ]
+# *******************************************
+# Dictionary Commands
+# *******************************************
+Dictionary_Definition_Commands_List = [
+    "what is the definition of ",
+    "what is the meaning of ",
+    "define ",
+    ]
