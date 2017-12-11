@@ -9,7 +9,7 @@ from Dashboard.models import UserProfile, Alarms, Reminders
 import AI.CommandPhrases
 from API.Functions import *
 
-class ReminderRequestView(View):
+class ReminderRequestNameView(View):
     def get(self, request):
         context = {}
         weather_context = {}
@@ -24,17 +24,35 @@ class ReminderRequestView(View):
         context['ai_voice'] = profile.ai_voice
         return render(request, "reminder/reminder_request.html", context=context)
 
+class ReminderRequestTimeView(View):
+    def get(self, request, name):
+        context = {}
+        weather_context = {}
+        profile = UserProfile.objects.get(current_profile=True)
+        # Set the profile so the command router accepts the next words as the time for the reminder
+        profile.reminder_create_active = False
+        profile.reminder_time_create_active = True
+        profile.save()
+        AI.CommandPhrases.Reminder_Name = name
+        context['current_date'] = datetime.datetime.now()
+        GetProfileWeather(profile, weather_context)
+        context.update(weather_context)
+        context['speech_response'] = "When do you want me to remind you?"
+        context['ai_voice'] = profile.ai_voice
+        return render(request, "reminder/reminder_request.html", context=context)
+
 class ReminderView(View):
-    def get(self, request):
-        data = request.session['reminder']
-        print("Reminder Created: " + data)
+    def get(self, request, time):
+        from dateutil import parser
+        dt = parser.parse(time)
         request.session['speech_response'] = "Ok I made a reminder."
         profile = UserProfile.objects.get(current_profile=True)
         # Set the profile so the command router finishes and doesnt loop
-        profile.reminder_create_active = False
+        profile.reminder_time_create_active = False
         profile.save()
-        reminder = Reminders.objects.create(profile=profile, reminder_name=data)
+        reminder = Reminders.objects.create(profile=profile, reminder_name=AI.CommandPhrases.Reminder_Name)
         reminder.reminder_time = datetime.datetime.now()
+        reminder.reminder_time = reminder.reminder_time.replace(day=dt.day, hour=dt.hour, minute=dt.minute)
         reminder.save()
         return redirect('Dashboard')
 

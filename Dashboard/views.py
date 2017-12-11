@@ -223,6 +223,9 @@ class VoiceCommandView(View):
     def post(self, request):
         data = request.POST
         profile = UserProfile.objects.get(current_profile=True)
+        # Check if first character has extra whitespace
+        if data['command'][0].isspace():
+            data['command'] = data['command'][1:]
         request.session['summary'] = False
         if profile.ai_setting_name:
             print("AI Setup Active: Name")
@@ -250,7 +253,10 @@ class VoiceCommandView(View):
             response, request.session['speech_response'], request.session['search'] = SearchCommandRouter(True, profile, data['command'])
         elif profile.reminder_create_active:
             print("Reminder is Active: " + data['command'])
-            response, request.session['reminder'] = ReminderCommandRouter(True, profile, data['command'])
+            response = ReminderCommandRouter(True, False, profile, data['command'])
+        elif profile.reminder_time_create_active:
+            print("Reminder Time is Active: " + data['command'])
+            response = ReminderCommandRouter(True, True, profile, data['command'])
         elif profile.math_request_active:
             print("Math is Active: " + data['command'])
             response, request.session['equation'] = EquationCommandRouter(True, profile, data['command'])
@@ -289,7 +295,7 @@ class VoiceCommandView(View):
                 found, response, request.session['speech_response'] = SearchCommandRouter(False, profile, data['command'])
             if not found:
                 print("Checking Reminder")
-                found, response = ReminderCommandRouter(False, profile, data['command'])
+                found, response = ReminderCommandRouter(False, False, profile, data['command'])
             if not found:
                 print("Checking Email")
                 found, response = EmailCommandRouter(False, False, profile, data['command'])

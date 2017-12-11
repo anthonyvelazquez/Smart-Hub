@@ -8,6 +8,8 @@ You can create an alarm by saying one of the commands in the Command.txt file. I
 Person: Can you create a reminder for me
 - AI asks for name -
 Person: School
+- AI asks for time -
+Person: Tomorrow 5pm
 - AI creates reminder based on info then displays dashboard
 ```
 ### Delete All:

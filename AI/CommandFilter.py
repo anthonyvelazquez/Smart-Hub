@@ -142,11 +142,14 @@ def SearchCommandRouter(active, profile, command):
 # *******************************************
 # Reminder Commands
 # *******************************************
-def ReminderCommandRouter(creating, profile, command):
+def ReminderCommandRouter(creating, time, profile, command):
     if creating:
-        reminder = command
-        response = {'status': 200, 'message': "Your error", 'url':reverse('Reminder')}
-        return response, reminder
+        if not time:
+            response = {'status': 200, 'message': "Your error", 'url':reverse('Reminder_Request_Time', kwargs={'name':command})}
+            return response
+        elif time:
+            response = {'status': 200, 'message': "Your error", 'url':reverse('Reminder', kwargs={'time':command})}
+            return response
     else:
         found = False
         if any(command in command_list for command_list in Generic_Reminder_Request_Commands_List):

@@ -72,8 +72,9 @@ urlpatterns = [
     # *******************************************
     # Reminder
     # *******************************************
-    url(r'^Reminder/Request$', ReminderRequestView.as_view(), name='Reminder_Request'),
-    url(r'^Reminder/Create$', ReminderView.as_view(), name='Reminder'),
+    url(r'^Reminder/Request$', ReminderRequestNameView.as_view(), name='Reminder_Request'),
+    url(r'^Reminder/Request/(?P<name>[^/]+)$', ReminderRequestTimeView.as_view(), name='Reminder_Request_Time'),
+    url(r'^Reminder/Create/(?P<time>[^/]+)$', ReminderView.as_view(), name='Reminder'),
     url(r'^Reminder/Delete/All$', DeleteAllReminderView.as_view(), name='Reminder_Delete_All'),
     url(r'^Reminder/Delete/First$', DeleteFirstReminderView.as_view(), name='Reminder_Delete_First'),
     url(r'^Reminder/Delete/Last$', DeleteLastReminderView.as_view(), name='Reminder_Delete_Last'),

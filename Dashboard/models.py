@@ -23,6 +23,8 @@ class UserProfile(models.Model):
     alarm_deleting_specific = models.BooleanField(default=False)
     
     reminder_create_active = models.BooleanField(default=False)
+    reminder_time_create_active = models.BooleanField(default=False)
+    
     math_request_active = models.BooleanField(default=False)
     sleep_active = models.BooleanField(default=False)
     search_active = models.BooleanField(default=False)
