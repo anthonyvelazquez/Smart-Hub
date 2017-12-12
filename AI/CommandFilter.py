@@ -82,12 +82,6 @@ def AlarmCommandRouter(active, profile, command):
                 found = True
                 print("Deleting All Alarms")
                 response = {'status': 200, 'message': "Your error", 'url':reverse('Alarm_Delete_All')}
-            elif any(command in command_list for command_list in Quick_Alarm_Request_Commands_List):
-                found = True
-                response = {'status': 200, 'message': "Your error", 'url':reverse('Alarm_Create_Quick', kwargs={'alarm':command})}
-            elif any(command in command_list for command_list in Set_Alarm_Request_Commands_List):
-                found = True
-                response = {'status': 200, 'message': "Your error", 'url':reverse('Alarm_Create_Specific', kwargs={'alarm':command})}
             elif any(command in command_list for command_list in Generic_Alarm_Request_Commands_List):
                 found = True
                 print("Creating Alarm")
@@ -96,6 +90,14 @@ def AlarmCommandRouter(active, profile, command):
                 response = {'status': 200, 'message': "Your error", 'url':reverse('Alarm_Request')}
             else:
                 response = ""
+            for commands in Set_Alarm_Request_Commands_List:
+                if commands in command:
+                    found = True
+                    response = {'status': 200, 'message': "Your error", 'url':reverse('Alarm_Create_Specific', kwargs={'alarm':command})}
+            for commands in Quick_Alarm_Request_Commands_List:
+                if commands in command:
+                    found = True
+                    response = {'status': 200, 'message': "Your error", 'url':reverse('Alarm_Create_Quick', kwargs={'alarm':command})}
             return found, response
 # *******************************************
 # Sleep Commands
@@ -157,19 +159,12 @@ def ReminderCommandRouter(creating, time, profile, command):
         if any(command in command_list for command_list in Generic_Reminder_Request_Commands_List):
             found = True
             response = {'status': 200, 'message': "Your error", 'url':reverse('Reminder_Request')}
-        # elif "make a reminder to " in command:
-        #     found = True
-        #     reminder = command.replace("make a reminder to ", "")
-        #     response = {'status': 200, 'message': "Your error", 'url':reverse('Reminder')}
         elif any(command in command_list for command_list in Generic_Reminder_Delete_Commands_List):
             found = True
             response = {'status': 200, 'message': "Your error", 'url':reverse('Reminder_Delete_All')}
         elif any(command in command_list for command_list in Reminder_Me_Request_Commands_List):
             found = True
             response = {'status': 200, 'message': "Your error", 'url':reverse('Reminder_Create_Specific', kwargs={'reminder':command})}
-        elif any(command in command_list for command_list in Quick_Reminder_Request_Commands_List):
-            found = True
-            response = {'status': 200, 'message': "Your error", 'url':reverse('Reminder_Create_Quick', kwargs={'reminder':command})}
         elif "delete my first reminder" in command or "delete the first reminder" in command:
             found = True
             response = {'status': 200, 'message': "Your error", 'url':reverse('Reminder_Delete_First')}
@@ -178,6 +173,14 @@ def ReminderCommandRouter(creating, time, profile, command):
             response = {'status': 200, 'message': "Your error", 'url':reverse('Reminder_Delete_Last')}
         else:
             response = ""
+        for commands in Quick_Reminder_Request_Commands_List:
+                if commands in command:
+                    found = True
+                    response = {'status': 200, 'message': "Your error", 'url':reverse('Reminder_Create_Quick', kwargs={'reminder':command})}
+        for commands in Reminder_Me_Request_Commands_List:
+                if commands in command:
+                    found = True
+                    response = {'status': 200, 'message': "Your error", 'url':reverse('Reminder_Create_Specific', kwargs={'reminder':command})}
         return found, response
 # *******************************************
 # Email Commands
@@ -386,9 +389,22 @@ def DictionaryCommandRouter(active, command):
         return response
     else:
         found = False
-        if any(command in command_list for command_list in Dictionary_Definition_Commands_List):
+        for commands in Dictionary_Definition_Commands_List:
+            if commands in command:
+                found = True
+                response = {'status': 200, 'message': "Your error", 'url':reverse('Dictionary_Definition', kwargs={'word':command})}
+                return found, response
+        response = ""
+        return found, response
+# *******************************************
+# Timer Commands
+# *******************************************
+def TimerCommandRouter(command):
+    found = False
+    for commands in Timer_Set_Commands_List:
+        if commands in command:
             found = True
-            response = {'status': 200, 'message': "Your error", 'url':reverse('Dictionary_Definition')}
-        else:
-            response = ""
+            response = {'status': 200, 'message': "Your error", 'url':reverse('Timer_Set', kwargs={'timer':command})}
+            return found, response
+    response = ""
     return found, response

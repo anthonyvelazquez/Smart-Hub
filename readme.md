@@ -10,15 +10,19 @@ These instructions will get you a copy of the project up and running on your loc
 
 #### [Alarm Module]
 
-* TODO: Testing and Error Checks
+* TODO: Add Error Checks
 
 #### [Reminder Module]
 
-* TODO: Testing and Error Checks
+* TODO: Add Error Checks
 
 #### [Sleep Module]
 
-* TODO: Test that alarms and reminders display
+* Status: Done
+
+#### [Timer Module]
+
+* Todo: Add Error Checks and add Countdown
 
 #### [Email Module](email-module.md)
 

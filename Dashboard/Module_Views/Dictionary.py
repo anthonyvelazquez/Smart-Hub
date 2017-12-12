@@ -11,10 +11,11 @@ dictionary=PyDictionary()
 class DefinitionView(View):
     def get(self, request, word):
         context = {}
+        word = word.replace("what is the definition of ", "")
         profile = UserProfile.objects.get(current_profile=True)
         definition = dictionary.meaning(word)
         first_def = definition[definition.keys()[0]][0]
-        context['speech_response'] = "The first definition for " + word + " is " + first_def + ". I will display the rest."
+        context['speech_response'] = "The first definition for " + word + " is " + first_def + ". I will display the rest on the screen."
         context['ai_voice'] = profile.ai_voice
         return render(request, "lol/lol_me.html", context=context)
 

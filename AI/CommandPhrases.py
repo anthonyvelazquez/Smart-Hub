@@ -8,13 +8,13 @@ Generic_Alarm_Request_Commands_List = [
     'create an alarm for me',
     ]
 Set_Alarm_Request_Commands_List = [
-    'set an alarm in ',
-    'set an alarm for ',
-    'set a repeating alarm for '
-    'wake me up at '
+    'set an alarm in',
+    'set an alarm for',
+    'set a repeating alarm for',
+    'wake me up at'
     ]
 Quick_Alarm_Request_Commands_List = [
-    'quick alarm ',
+    'quick alarm',
     ]
 Generic_Alarm_Delete_Commands_List = [
     'delete all alarms',
@@ -48,7 +48,7 @@ Quick_Reminder_Request_Commands_List = [
     'quick reminder',
     ]
 Reminder_Me_Request_Commands_List = [
-    'remind me to ',
+    'remind me to',
     ]
 Generic_Reminder_Delete_Commands_List = [
     'delete all reminders',
@@ -63,8 +63,6 @@ Reminder_Name = ""
 # Sleep Commands
 # *******************************************
 Generic_Sleep_Enable_Commands_List = [
-    'activate sleep mode',
-    'go into sleep mode',
     'goodbye',
     'sleep mode',
     ]
@@ -106,7 +104,8 @@ Generic_Email_All_Commands_List = [
 Generic_Apple_Find_iPhone_Commands_List = [
     'find my iPhone',
     "find my iPhone's location",
-    "where is my iPhone"
+    "where is my iPhone",
+    "display my iPhone information"
     ]
 # *******************************************
 # Weather Commands
@@ -185,4 +184,10 @@ Dictionary_Definition_Commands_List = [
     "what is the definition of ",
     "what is the meaning of ",
     "define ",
+    ]
+# *******************************************
+# Timer Commands
+# *******************************************
+Timer_Set_Commands_List = [
+    "set timer for"
     ]

@@ -42,6 +42,9 @@ class UserProfile(models.Model):
     uber_car_seat_request = models.BooleanField(default=False)
     uber_address_request = models.BooleanField(default=False)
 
+    timer_time = models.DateTimeField(null=True, default=None, blank=True)
+    timer_enabled = models.BooleanField(default=False)
+
     #Commute
     loc_1 = models.TextField(null=True, default=None, blank=True)
     loc_2 = models.TextField(null=True, default=None, blank=True)

@@ -233,12 +233,12 @@ class VoiceCommandView(View):
         elif profile.ai_setting_gender:
             print("AI Setup Active: Gender")
             response, request.session['ai_info'] = AISetupCommandRouter(True, 2, profile, data['command'])
-        elif profile.sleep_active and not profile.alarm_active:
-            print("Sleep Mode Active: ")
-            response, request.session['speech_response'] = SleepCommandRouter(True, profile, data['command'])
         elif profile.alarm_active:
             print("Alarm is Currently Going Off: ")
             response = AlarmCommandRouter(True, profile, data['command'])
+        elif profile.sleep_active:
+            print("Sleep Mode Active: ")
+            response, request.session['speech_response'] = SleepCommandRouter(True, profile, data['command'])
         elif profile.unread_email_request:
             print("Unread Specific Email Number: " + data['command'])
             response = EmailCommandRouter(True, True, profile, data['command'])
@@ -317,6 +317,12 @@ class VoiceCommandView(View):
             if not found:
                 print("Checking Uber")
                 found, response = UberCommandRouter(False, 0, data['command'])
+            if not found:
+                print("Checking Dictionary")
+                found, response = DictionaryCommandRouter(False, data['command'])
+            if not found:
+                print("Checking Timer")
+                found, response = TimerCommandRouter(data['command'])
             # if not found:
             #     print("Checking Equation")
             #     found, response, request.session['speech_response'], request.session['equation'] = EquationCommandRouter(False, profile, data['command'])

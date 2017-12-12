@@ -15,7 +15,7 @@ class ReminderRequestNameView(View):
         weather_context = {}
         profile = UserProfile.objects.get(current_profile=True)
         # Set the profile so the command router accepts the next words as the name for the reminder
-        profile.reminder_create_active = True
+        profile.reminder_creating_name = True
         profile.save()
         context['current_date'] = datetime.datetime.now()
         GetProfileWeather(profile, weather_context)
@@ -30,7 +30,7 @@ class ReminderRequestTimeView(View):
         weather_context = {}
         profile = UserProfile.objects.get(current_profile=True)
         # Set the profile so the command router accepts the next words as the time for the reminder
-        profile.reminder_create_active = False
+        profile.reminder_creating_name = False
         profile.reminder_time_create_active = True
         profile.save()
         AI.CommandPhrases.Reminder_Name = name
@@ -60,10 +60,8 @@ class CreateQuickReminderView(View):
     def get(self, request, reminder):
         data = reminder.replace("quick reminder ", "")
         request.session['speech_response'] = "I created your reminder."
-        from dateutil import parser
-        dt = parser.parse(data)
         profile = UserProfile.objects.get(current_profile=True)
-        reminder = Reminders.objects.create(profile=profile, reminder_name=reminder, enabled=True)
+        reminder = Reminders.objects.create(profile=profile, reminder_name=data)
         reminder.reminder_time = datetime.datetime.now()
         reminder.reminder_time = reminder.reminder_time + datetime.timedelta(days=1)
         reminder.save()

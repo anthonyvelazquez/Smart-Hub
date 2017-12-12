@@ -109,34 +109,62 @@ class CreateQuickAlarmView(View):
 
 class CreateSpecificAlarmView(View):
     def get(self, request, alarm):
-        data = alarm.replace("set an alarm in ", "")
-        data1 = alarm.replace("set an alarm for ", "")
-        data2 = alarm.replace("set a repeating alarm for ", "")
+        mode = 0
+        # Used for mode 1 which means increase by certain number: 1 = secs, 2 = mins, 3 = hrs
+        time_mode = 0
+        if "set an alarm in" in alarm:
+            mode = 1
+        elif "set an alarm for" in alarm:
+            mode = 2
+        elif "set a repeating alarm for" in alarm:
+            mode = 3
+        elif "wake me up at" in alarm:
+            mode = 4
         data2 = alarm.replace("wake me up at ", "")
         from dateutil import parser
         profile = UserProfile.objects.get(current_profile=True)
-        alarm = Alarms.objects.create(profile=profile, alarm_name="Alarm", enabled=True)
-        alarm.alarm_time = datetime.datetime.now()
-        if data:
+        alarm_obj = Alarms.objects.create(profile=profile, alarm_name="Alarm", enabled=True)
+        alarm_obj.alarm_time = datetime.datetime.now()
+        if mode == 1:
+            data = alarm.replace("set an alarm in ", "")
+            if "second" in data:
+                time_mode = 2
+            elif "minute" in data:
+                time_mode = 2
+            elif "hour" in data:
+                time_mode = 3
             dt = parser.parse(data)
             request.session['speech_response'] = "I made an alarm for " + data
-        elif data1:
-            dt = parser.parse(data1)
-            request.session['speech_response'] = "I made an alarm for " + data1
-        elif data2:
-            dt = parser.parse(data2)
-            alarm.daily = True
-            request.session['speech_response'] = "I made a repeating alarm for " + data2
-        elif data3:
-            dt = parser.parse(data3)
-            request.session['speech_response'] = "I will wake you up at " + data3
+        elif mode == 2:
+            data = alarm.replace("set an alarm for ", "")
+            dt = parser.parse(data)
+            request.session['speech_response'] = "I made an alarm for " + data
+        elif mode == 3:
+            data = alarm.replace("set a repeating alarm for ", "")
+            dt = parser.parse(data)
+            alarm_obj.daily = True
+            request.session['speech_response'] = "I made a repeating alarm for " + data
+        elif mode == 4:
+            data = alarm.replace("wake me up at ", "")
+            dt = parser.parse(data)
+            request.session['speech_response'] = "I will wake you up at " + data
+        
         # Check if alarm should be today or tomorrow
-        if alarm.alarm_time.hour < dt.hour:
-            alarm.alarm_time = alarm.alarm_time + datetime.timedelta(days=1)
-        elif alarm.alarm_time.hour == dt.hour and alarm.alarm_time.minute < dt.minute:
-            alarm.alarm_time = alarm.alarm_time + datetime.timedelta(days=1)
-        alarm.alarm_time = alarm.alarm_time.replace(hour=dt.hour, minute=dt.minute)
-        alarm.save()
+        if mode != 1:
+            if alarm_obj.alarm_time.hour < dt.hour:
+                alarm_obj.alarm_time = alarm_obj.alarm_time + datetime.timedelta(days=1)
+            elif alarm_obj.alarm_time.hour == dt.hour and alarm_obj.alarm_time.minute < dt.minute:
+                alarm_obj.alarm_time = alarm_obj.alarm_time + datetime.timedelta(days=1)
+        if mode == 1:
+            if time_mode == 1:
+                alarm_obj.alarm_time = alarm_obj.alarm_time + datetime.timedelta(seconds=dt.second)
+            elif time_mode == 2:
+                alarm_obj.alarm_time = alarm_obj.alarm_time + datetime.timedelta(minutes=dt.minute)
+            elif time_mode == 3:
+                alarm_obj.alarm_time = alarm_obj.alarm_time + datetime.timedelta(hours=dt.hour)
+        else:
+            alarm_obj.alarm_time = alarm_obj.alarm_time.replace(hour=dt.hour, minute=dt.minute)
+        alarm_obj.save()
         return redirect('Dashboard')
 
 class DisplayAlarmView(View):

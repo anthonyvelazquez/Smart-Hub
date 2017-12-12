@@ -15,6 +15,7 @@ from Dashboard.Module_Views.Reddit import *
 from Dashboard.Module_Views.Twitter import *
 from Dashboard.Module_Views.System import *
 from Dashboard.Module_Views.Dictionary import *
+from Dashboard.Module_Views.Timer import *
 from django.views.decorators.csrf import csrf_exempt
 
 urlpatterns = [
@@ -129,6 +130,12 @@ urlpatterns = [
     # Dictionary
     # *******************************************
     url(r'^Dictionary/Definition/(?P<word>[^/]+)$', DefinitionView.as_view(), name='Dictionary_Definition'),
+    # *******************************************
+    # Dictionary
+    # *******************************************
+    url(r'^Timer/Set/(?P<timer>[^/]+)$', TimerSetView.as_view(), name='Timer_Set'),
+    url(r'^Timer/Display$', TimerDisplayView.as_view(), name='Timer_Display'),
+    url(r'^Timer/Done$', TimerDoneView.as_view(), name='Timer_Done'),
 ]
 
 # https://docs.smart-mirror.io/docs/configure_the_mirror.html#giphy
