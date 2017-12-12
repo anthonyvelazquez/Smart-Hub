@@ -399,10 +399,15 @@ def DictionaryCommandRouter(active, command):
                 found = True
                 response = {'status': 200, 'message': "Your error", 'url':reverse('Dictionary_SynAnt', kwargs={'word':command})}
                 return found, response
-        for commands in Dictionary_Translate_Commands_List:
+        for commands in Dictionary_Translate_Word_Commands_List:
             if commands in command:
                 found = True
-                response = {'status': 200, 'message': "Your error", 'url':reverse('Dictionary_Translate', kwargs={'word':command})}
+                response = {'status': 200, 'message': "Your error", 'url':reverse('Dictionary_Translate_Word', kwargs={'word':command})}
+                return found, response
+        for commands in Dictionary_Translate_Sentence_Commands_List:
+            if commands in command:
+                found = True
+                response = {'status': 200, 'message': "Your error", 'url':reverse('Dictionary_Translate_Sentence', kwargs={'sentence':command})}
                 return found, response
         response = ""
         return found, response

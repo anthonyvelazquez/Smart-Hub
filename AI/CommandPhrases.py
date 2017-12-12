@@ -192,8 +192,11 @@ Dictionary_SynAnt_Commands_List = [
     "what are the synonyms for",
     "what are the antonyms for"
     ]
-Dictionary_Translate_Commands_List = [
+Dictionary_Translate_Word_Commands_List = [
     "translate the word",
+    ]
+Dictionary_Translate_Sentence_Commands_List = [
+    "translate the sentence",
     ]
 # *******************************************
 # Timer Commands

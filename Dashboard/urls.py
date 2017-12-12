@@ -131,7 +131,8 @@ urlpatterns = [
     # *******************************************
     url(r'^Dictionary/Definition/(?P<word>[^/]+)$', DefinitionView.as_view(), name='Dictionary_Definition'),
     url(r'^Dictionary/SynAnt/(?P<word>[^/]+)$', SynAntView.as_view(), name='Dictionary_SynAnt'),
-    url(r'^Dictionary/Translate/(?P<word>[^/]+)$', TranslateView.as_view(), name='Dictionary_Translate'),
+    url(r'^Dictionary/Translate/Word/(?P<word>[^/]+)$', TranslateWordView.as_view(), name='Dictionary_Translate_Word'),
+    url(r'^Dictionary/Translate/Sentence/(?P<sentence>[^/]+)$', TranslateSentenceView.as_view(), name='Dictionary_Translate_Sentence'),
     # *******************************************
     # Timer
     # *******************************************

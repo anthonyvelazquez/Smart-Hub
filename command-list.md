@@ -58,4 +58,6 @@
 
 * What are the synonyms for apple / What are the antonyms for apple / What is the synonym for boat / What is the antonym for boat
 
-* Translate the word dog
+* Translate the word "dog" to spanish
+
+* Translate the sentence "I like french fries" to spanish
