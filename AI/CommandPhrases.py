@@ -184,6 +184,16 @@ Dictionary_Definition_Commands_List = [
     "what is the definition of ",
     "what is the meaning of ",
     "define ",
+    "Define ",
+    ]
+Dictionary_SynAnt_Commands_List = [
+    "what is the synonym for ",
+    "what is the antonym for",
+    "what are the synonyms for",
+    "what are the antonyms for"
+    ]
+Dictionary_Translate_Commands_List = [
+    "translate the word",
     ]
 # *******************************************
 # Timer Commands

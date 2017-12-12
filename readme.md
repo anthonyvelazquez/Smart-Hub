@@ -24,6 +24,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 * Todo: Add Error Checks and add Countdown
 
+#### [Dictionary Module]
+
+* Todo: Add Error Checks
+
 #### [Email Module](email-module.md)
 
 * TODO: Update the viewing for MIME emails(Only some emails work)

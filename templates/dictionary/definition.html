@@ -20,17 +20,28 @@
         <div class="col-md-2" style="color: white;">
         </div>
         <div class="col-md-8" style="color: white; text-align:center;">
-            Creating Reminder
+            Definition of {{ word }}
+            <hr>
         </div>
         <div class="col-md-2" style="color: white;">
         </div>
     </div>
     <div class="row">
-            <div class="col-md-2" style="color: white;margin-top:10%;">
+            <div class="col-md-8 col-md-offset-2" style="color: white;margin-top:1%;">
+                {% for type, definition in definition_list %}
+                <h3>{{type}}</h3>
+                <ul>
+                    <li><h4>{{definition.0}}</h4></li>
+                    {% if definition.1 %}
+                    <li><h4>{{definition.1}}</h4></li>
+                    {% endif %}
+                    {% if definition.2 %}
+                    <li><h4>{{definition.2}}</h4></li>
+                    {% endif %}
+                </ul>
+                {% endfor %}
             </div>
-            <div class="col-md-8" style="color: white; text-align:center;margin-top:10%;">
-            <div class="col-md-2" style="color: white;">
-            </div>
+            
         </div>
     <div class="row">
             <div class="col-md-4" style="color: white;margin-top:15%;">

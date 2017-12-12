@@ -4,11 +4,10 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-md-2" style="color: white;">
-                <h5>{{current_date|date:"D N d Y"}}</h5>
-                <h1 id="time"></h1>
         </div>
         <div class="col-md-8" style="color: white;text-align:center;">
-            
+            <h5>{{current_date|date:"D N d Y"}}</h5>
+            <h1 id="time"></h1>
         </div>
         <div class="col-md-2" style="color: white;text-align:right;">
             <h5><i class="fa fa-sun-o" aria-hidden="true"></i> Sunrise: {{sunrise|date:"P"}}</h5>
@@ -20,37 +19,22 @@
         <div class="col-md-2" style="color: white;">
         </div>
         <div class="col-md-8" style="color: white; text-align:center;">
-            Creating Reminder
         </div>
         <div class="col-md-2" style="color: white;">
         </div>
     </div>
     <div class="row">
-            <div class="col-md-2" style="color: white;margin-top:10%;">
+            <div class="col-md-1" style="color: white;margin-top:10%;">
             </div>
-            <div class="col-md-8" style="color: white; text-align:center;margin-top:10%;">
+            <div class="col-md-8 col-md-offset-1" style="color: white; text-align:center;margin-top:10%;">
+            <div id="test"><h1 style="font-size: 700%;">{{trans}}</h1><h5 id="message" style="font-size: 400%;">{{word}}</h5><h5 style="margin-top:5%">Translated from English to {{lang}}</h5></div>
+            </div>
             <div class="col-md-2" style="color: white;">
-            </div>
-        </div>
-    <div class="row">
-            <div class="col-md-4" style="color: white;margin-top:15%;">
-            </div>
-            <div class="col-md-5" style="color: white; text-align:center;">
-
-            </div>
-            <div class="col-md-3" style="color: white;margin-top:10%;">
-            </div>
-    </div>
-    <div class="row">
-            <div class="col-md-3" style="color: white;">
-            </div>
-            <div class="col-md-6" style="color: white; text-align:center;margin-top:5%;">
-            </div>
-            <div class="col-md-2 col-md-offset-1" style="text-align:center;color: white;margin-top:5%;">
             </div>
         </div>
 </div>
 <script>
+
 </script>
 
 {% endblock %}>

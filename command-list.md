@@ -50,4 +50,12 @@
 
 ### Timer Module:
 
-* Set time for 2 minutes
+* Set timer for 2 minutes / Set a timer for 40 seconds
+
+### Dictionary Module:
+
+* What is the definition of apple / What is the meaning of house / Define chicken
+
+* What are the synonyms for apple / What are the antonyms for apple / What is the synonym for boat / What is the antonym for boat
+
+* Translate the word dog

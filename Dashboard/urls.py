@@ -130,8 +130,10 @@ urlpatterns = [
     # Dictionary
     # *******************************************
     url(r'^Dictionary/Definition/(?P<word>[^/]+)$', DefinitionView.as_view(), name='Dictionary_Definition'),
+    url(r'^Dictionary/SynAnt/(?P<word>[^/]+)$', SynAntView.as_view(), name='Dictionary_SynAnt'),
+    url(r'^Dictionary/Translate/(?P<word>[^/]+)$', TranslateView.as_view(), name='Dictionary_Translate'),
     # *******************************************
-    # Dictionary
+    # Timer
     # *******************************************
     url(r'^Timer/Set/(?P<timer>[^/]+)$', TimerSetView.as_view(), name='Timer_Set'),
     url(r'^Timer/Display$', TimerDisplayView.as_view(), name='Timer_Display'),
