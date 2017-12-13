@@ -15,6 +15,7 @@ import django.contrib.auth.views
 urlpatterns = [
     # Examples:
     url(r'', include('Dashboard.urls')),
+    url(r'SmartClock/', include('SmartClock.urls')),
     url(r'^login/$',
         django.contrib.auth.views.login,
         {

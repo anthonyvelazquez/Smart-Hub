@@ -1,0 +1,91 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>{% block title %}Smart Mirror{% endblock %}</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body  style="cursor: none; left:0;top:0;margin:0;padding:0;background-color:black;position:absolute;width: 100%; height: 100%;overflow:hidden;">
+        {% block content %}
+        {% endblock %}
+    <script>
+    $(window).bind("load", function() {
+        var now = new Date();
+        console.log(now.getHours())
+        if(now.getHours() >= 12)
+        {
+            if(now.getHours() > 12)
+                {var time = now.getHours()-12 + ":";}
+            else
+                {var time = now.getHours() + ":";}
+            if(now.getMinutes() > 9)
+            {
+                time = time + now.getMinutes();
+            }
+            else
+            {
+                time = time + "0" + now.getMinutes();
+            }
+            time = time + " PM";
+        }
+        else 
+        {
+            var time = now.getHours() + ":";
+            if(now.getMinutes() > 9)
+            {
+                time = time + now.getMinutes();
+            }
+            else
+            {
+                time = time + "0" + now.getMinutes();
+            }
+            time = time + " AM";
+        }
+        $("#time").text(time)
+
+    
+    });
+    function UpdateTime() {
+        var now = new Date();
+        if(now.getHours() >= 12)
+        {
+            if(now.getHours() > 12)
+                {var time = now.getHours()-12 + ":";}
+            else
+                {var time = now.getHours() + ":";}
+            if(now.getMinutes() > 9)
+            {
+                time = time + now.getMinutes();
+            }
+            else
+            {
+                time = time + "0" + now.getMinutes();
+            }
+            time = time + " PM";
+        }
+        else 
+        {
+            var time = now.getHours() + ":";
+            if(now.getMinutes() > 9)
+            {
+                time = time + now.getMinutes();
+            }
+            else
+            {
+                time = time + "0" + now.getMinutes();
+            }
+            time = time + " AM";
+        }
+        $("#time").text(time)
+    }
+    window.setInterval(function(){
+        UpdateTime();
+    }, 1000);
+    </script>
+</body>
+
+</html>
